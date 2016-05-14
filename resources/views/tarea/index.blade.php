@@ -7,7 +7,7 @@
     <table id="profesores" class="table table-striped table-bordered" cellspacing="10" width="95%">
         <thead>
 
-           {{-- ('nombre', 'descripcion', 'file', 'audio', 'mapa_id') --}}
+           {{-- ('nombre', 'descripcion', 'file', 'audio', 'tema_id') --}}
 
             <tr>
                 {{-- <th>ID</th> --}}
@@ -15,7 +15,7 @@
                 <th style="width: 30%">Descripcion</th>
                 {{-- <th>Imagen</th> --}}
                 {{-- <th>Audio</th> --}}
-                <th>Mapa</th>
+                <th>tema</th>
                 <th></th>
             </tr>
         </thead> 
@@ -27,8 +27,8 @@
                 <td>{!! $value->descripcion !!}</td>
                 {{-- <td>{!! $value->file !!}</td> --}}
                 {{-- <td>{!! $value->audio !!}</td> --}}
-                <td>{!! $value->my_mapa()->titulo !!}</td>
-                <td><img src="../images/mapas/{!! $value->my_mapa()->enlace !!}" alt="{!! $value->my_mapa()-> titulo !!}" class="img-responsive img-rounded"  width="64" style="display:inline;"></img></td>
+                <td>{!! $value->my_tema()->titulo !!}</td>
+                <td><img src="../images/temas/{!! $value->my_tema()-> enlace !!}" alt="{!! $value->my_tema()-> titulo !!}" class="img-responsive img-rounded"  width="64" style="display:inline;"></img></td>
                 <td>
                     <a class="btn btn-small btn-success" href="{{ URL::to('tarea/' . $value->id) }}"> 
                         <i class="glyphicon glyphicon-eye-open"></i> Ver </a>
@@ -37,16 +37,15 @@
                     {!! Form::open(array('url' => 'tarea/' . $value->id, 'class' => 'pull-right ')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
                     
-                    {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger')) !!}
-                    <i class="glyphicon glyphicon-remove"></i>
+                    {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger')) !!}                    
                 {!! Form::close() !!}
                 </td>
             </tr>
             @endforeach 
         </tbody>
     </table>
-    <div class="row">
+    <div class="row col-md-2 pull-right">
     <a class="btn btn-small btn-primary" href="{{ URL::to('tarea/create') }}"> 
-<i class="glyphicon glyphicon-plus"></i> Nuevo Tarea </a>
+<i class="glyphicon glyphicon-plus"></i> Nueva Tarea </a>
         </div>
 @stop

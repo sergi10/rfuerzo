@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Profesor as Profesor;
 use App\Centro as Centro;
-use App\Mapa as Mapa;
+use App\Tema as Tema;
 
 class ProfesorController extends Controller
 {
@@ -43,16 +43,36 @@ class ProfesorController extends Controller
      */
     public function store(Request $request)
     {
+        // validacion de datos
+
         $rules = array(
             'nombre'    => 'required',           
             'apellidos' => 'required',    
-            'mail'      => 'required|email',
-            'user'      => 'required|min:2',
-            'pass'      => 'required|min:2',
+            'mail'      => 'required|email|unique:profesor',
+            'user'      => 'required|min:6|unique:profesor',
+            'pass'      => 'required|min:6',
             'centro_id' => 'required'
             // 'nacimiento'=> 'required'
         );
-        $identicon = new \Identicon\Identicon();
+         $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'email' => 'La dirección de correo :attribute debe ser un email valido.',
+            'email.unique' => 'La dirección de correo :attribute ya esta registrada.',
+            'user.unique' => 'El usuario :attribute ya esta registrado.',
+            'user.min' => 'El :attribute debe de tener como minimo :min digitos.',
+            'pass.min' => 'El :attribute debe de tener como minimo :min digitos.',
+
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
+
+        
+        // proceso de validacion
+        if ($validator->fails()) {
+            return \Redirect::to('profesor/create')
+                ->withErrors($validator);
+        } else {
+            // obtener imagen 
+            $identicon = new \Identicon\Identicon();
         $imageData = $identicon->getImageData(\Input::get('user'). \Input::get('mail'), 128);
         $avatar_name = uniqid();
         $avatar_name = $avatar_name .'.png';
@@ -60,20 +80,14 @@ class ProfesorController extends Controller
         \Storage::put($avatar_name, $imageData);
         file_put_contents(getcwd().$destino.$avatar_name, \Storage::get($avatar_name));
 
-        $validator = \Validator::make(\Input::all(), $rules);
-        // proceso de login
-        if ($validator->fails()) {
-            return \Redirect::to('profesor/create')
-                ->withErrors($validator);
-        } else {
             // guardar
             $profesor = new Profesor;
-            $theId = \DB::getPdo()->lastInsertId(); 
-            // dd($theId) ;
-            $new_id = 0;
-            if ($theId > 0){
-                $new_id = $theId +1;    
-            }
+            // $theId = \DB::getPdo()->lastInsertId(); 
+            // // dd($theId) ;
+            // $new_id = 0;
+            // if ($theId > 0){
+            //     $new_id = $theId +1;    
+            // }
             
             // $profesor->id           = $new_id;
             $profesor->nombre       = \Input::get('nombre');
@@ -104,13 +118,13 @@ class ProfesorController extends Controller
     {
         $profesor = Profesor::find($id);
         $centro = Centro::find($profesor->centro_id);
-        $mapas = $profesor->mapas();
+        $temas = $profesor->temas();
         // $mepas = Profesor::with('mapas', 'mapas.titulo')->find(1);
         // $mapas = Mapa::with('mapas')->find($profesor->id);
         // $mapas = \DB::table('mapa')->where('profesor_id', $profesor->id);
         // $mapas = Profesor::find($profesor->id)->mapas;
         // dd($mapas);  
-        return \View::make('profesor.show', array('datos'=>$profesor, 'centro'=>$centro, 'maps'=>$mapas));
+        return \View::make('profesor.show', array('datos'=>$profesor, 'centro'=>$centro, 'temas'=>$temas));
     }
 
     /**
@@ -138,16 +152,25 @@ class ProfesorController extends Controller
         $rules = array(
             'nombre'    => 'required',           
             'apellidos' => 'required',    
-            'mail'      => 'required|email',
-            'user'      => 'required|min:2',
-            'pass'      => 'required|min:2',
+            'mail'      => 'required|email|unique:profesor',
+            'user'      => 'required|min:6|unique:profesor',
+            'pass'      => 'required|min:6',
             'centro_id' => 'required'
             // 'nacimiento'=> 'required'
         );
-        $validator = \Validator::make(\Input::all(), $rules);
+       $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'email' => 'La dirección de correo :attribute debe ser un email valido.',
+            'email.unique' => 'La dirección de correo :attribute ya esta registrada.',
+            'user.unique' => 'El usuario :attribute ya esta registrado.',
+            'user.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'pass.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
+
         // proceso de login
         if ($validator->fails()) {
-            return \Redirect::to('profesor/' . $id . 'edit')
+            return \Redirect::to('profesor/' . $id . '/edit')
                 ->withErrors($validator);
         } else {
             // guardar

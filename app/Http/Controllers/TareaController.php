@@ -7,11 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Mapa as Mapa;
 use App\Tarea as Tarea;
+use App\Tema as Tema;
 
-// include 'phpQuery-onefile.php';
-// include 'phpQuery-onefile.php';
 
 class TareaController extends Controller
 {
@@ -35,8 +33,8 @@ class TareaController extends Controller
     public function create()
     {
         
-        $mapas = Mapa::lists('titulo', 'id');
-        return \View::make('tarea.create', array('mapas'=>$mapas));
+        $temas = Tema::lists('titulo', 'id');
+        return \View::make('tarea.create', array('temas'=>$temas));
     }
 
     /**
@@ -47,15 +45,22 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-         // ('nombre', 'descripcion', 'file', 'audio', 'mapa_id')
+         // ('nombre', 'descripcion', 'file', 'audio', 'tema_id')
 
         $rules = array(
-            'nombre'        => 'required',           
-            'descripcion'   => 'required', 
+            'nombre'        => 'required|min:6|unique:tarea',          
+            'descripcion'   => 'required|min:6', 
             'file'          => 'required', 
-            'mapa_id'       => 'required'
+            'tema_id'       => 'required'
         );
-        $validator = \Validator::make(\Input::all(), $rules);
+        $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'nombre.unique' => 'La tarea :attribute ya esta registrado.',
+            'nombre.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'descripcion.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
+        
         // proceso de login
         if ($validator->fails()) {
             return \Redirect::to('tarea/create')
@@ -89,8 +94,8 @@ class TareaController extends Controller
             $tarea->descripcion          = \Input::get('descripcion');
             // $tarea->file                 = \Input::get('file');
             // $tarea->audio                = \Input::get('audio');
-            $tarea->enlace_imagen        = $nombre;
-            $tarea->mapa_id              = \Input::get('mapa_id');
+            $tarea->enlace_tarea         = $nombre;
+            $tarea->tema_id              = \Input::get('tema_id');
             $tarea->save();
 
             // redirect
@@ -108,7 +113,7 @@ class TareaController extends Controller
     public function show($id)
     {
         $tarea = Tarea::find($id);
-        $document = \phpQuery::newDocumentHTML($tarea->file);
+        $document = \phpQuery::newDocumentHTML($tarea->enlace);
         return \View::make('tarea.show', array('datos'=>$tarea, 'doc'=>$document));
     }
 
@@ -121,8 +126,8 @@ class TareaController extends Controller
     public function edit($id)
     {
         $tarea = Tarea::find($id);
-        $mapas = Mapa::lists('titulo', 'id');
-        return \View::make('tarea.edit', array('datos'=>$tarea, 'mapas'=>$mapas));
+        $temas = Tema::lists('titulo', 'id');
+        return \View::make('tarea.edit', array('datos'=>$tarea, 'temas'=>$temas));
     }
 
     /**
@@ -134,15 +139,19 @@ class TareaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = array(
-            'nombre'    => 'required',           
-            'descripcion' => 'required',    
-            // 'enlace_imagen'      => 'required',
-            // 'imagen'      => 'required',
-            // 'audio'      => 'required',
-            'mapa_id' => 'required'
+          $rules = array(
+            'nombre'        => 'required|min:6|unique:tarea',          
+            'descripcion'   => 'required|min:6', 
+            'tema_id'       => 'required'
         );
-        $validator = \Validator::make(\Input::all(), $rules);
+        $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'nombre.unique' => 'La tarea :attribute ya esta registrado.',
+            'nombre.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'descripcion.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
+        
         // proceso de login
         if ($validator->fails()) {
             return \Redirect::to('tarea/' . $id . 'edit')
@@ -155,7 +164,7 @@ class TareaController extends Controller
             // $tarea->file                 = \Input::get('file');
             // $tarea->audio                = \Input::get('audio');
             // $tarea->enlace_imagen               = \Input::get('enlace_imagen');
-            $tarea->mapa_id              = \Input::get('mapa_id');
+            $tarea->tema_id              = \Input::get('tema_id');
             $tarea->save();
 
             // redirect

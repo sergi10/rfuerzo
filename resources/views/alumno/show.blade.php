@@ -9,7 +9,7 @@
 		<h2><strong>{{ $datos -> nombre }}</strong></h2>
 		<h2><strong>Avatar: </strong></h2>
 		<img src="../images/avatares/{!! $datos -> enlace_avatar !!}" alt="{!! $datos -> nombre !!}" class="img-responsive img-rounded" width="100"></img><br>
-		{{-- 'id','nombre','apellidos','mail','user','pass','avatar', 'f-nac', 'centro_id' --}}
+		{{-- 'id','nombre','apellidos','mail','user','pass','enlace_avatar', 'f-nac', 'centro_id' --}}
 		<p style="display: inline-block;">
 			<strong>Nombre: </strong>{{$datos -> nombre}}<br>
 			<strong>Apellidos: </strong>{{$datos -> apellidos}}<br>
@@ -24,8 +24,8 @@
 			 <table id="notas_alumnos" class="table table-striped table-bordered" cellspacing="6" width="75%">
 			 <p hidden>{{ $puntuacion = 0}}</p>
 			<thead>
-                <th>Mapa</th>
-                <th style="width: 30%">Tarea</th>
+                <th style="width: 35%">Tema</th>
+                <th style="width: 45%">Tarea</th>
                 <th>nota</th>
             </tr>
         </thead> 
@@ -53,7 +53,9 @@
 			{{-- <strong>imagen: </strong>{{$datos -> enlace_avatar}}<br> --}}
 
 
-<div class="row">
-<a href="{!!  URL::to('alumno') !!}"><i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Volver</i></a>
+<div class="row col-md-2 pull-right">
+	<a href="{!!  URL::to('alumno') !!}">
+		<i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Volver</i>
+	</a>
 </div>
 @stop

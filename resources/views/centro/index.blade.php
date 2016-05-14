@@ -16,8 +16,8 @@
         	@foreach($datos as $key => $value)
             <tr>
                 <td>{!! $value->id !!}</td>
-                <td>{!! $value->nombre !!}</td>
-                <td>{!! $value->direccion !!}</td>
+                <td style="width: 35%">{!! $value->nombre !!}</td>
+                <td style="width: 35%">{!! $value->direccion !!}</td>
                 <td>
                     <a class="btn btn-small btn-success" href="{{ URL::to('centro/' . $value->id) }}"> 
                         <i class="glyphicon glyphicon-eye-open"></i> Ver </a>
@@ -26,15 +26,14 @@
                     {!! Form::open(array('url' => 'centro/' . $value->id, 'class' => 'pull-right ')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
                     
-                    {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger glyphicon glyphicon-remove')) !!}
-                    <i class="glyphicon glyphicon-remove"></i>
+                    {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger')) !!}                    
                 {!! Form::close() !!}
                 </td>
             </tr>
             @endforeach 
         </tbody>
     </table>
-    <div class="row">
+   <div class="row col-md-2 pull-right">
     <a class="btn btn-small btn-primary" href="{{ URL::to('centro/create') }}"> 
 <i class="glyphicon glyphicon-plus"></i> Nuevo Centro </a>
         </div>

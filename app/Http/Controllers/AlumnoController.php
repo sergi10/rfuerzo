@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;use App\Alumno;
 // use App\Alumno;
 use App\Centro as Centro;
 use App\Profesor as Profesor;
+// use App\DB as DB;
+use DB;
 class AlumnoController extends Controller
 {
         /**
@@ -20,7 +22,11 @@ class AlumnoController extends Controller
     public function index()
     {
         // 'nombre','apellidos','mail','user','pass','avatar', 'nacimiento',  'centro_id', 'enlace_avatar'
-        $alumnos = Alumno::all();
+        $alumnos = Alumno::all()->simplePaginate(15);
+
+        // prueba de paginación
+          // $alumnos = Alumno::paginate(2);
+        // $alumnos = DB::table('alumno')->simplePaginate(15);
         return \View::make('alumno.index', array('datos'=>$alumnos));
     }
 
@@ -44,30 +50,45 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
+        // validacion de datos
+
         $rules = array(
             'nombre'    => 'required',           
             'apellidos' => 'required',    
-            'mail'      => 'required|email',
-            'user'      => 'required|min:2',
-            'pass'      => 'required|min:2',
+            'mail'      => 'required|email|unique:alumno',
+            'user'      => 'required|min:6|unique:alumno',
+            'pass'      => 'required|min:6',
             'centro_id' => 'required',
-            'profesor_id' => 'required',
+            'profesor_id' => 'required'
             // 'nacimiento'=> 'required'
         );
-        $identicon = new \Identicon\Identicon();
+        $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'email' => 'La dirección de correo :attribute debe ser un email valido.',
+            'email.unique' => 'La dirección de correo :attribute ya esta registrada.',
+            'user.unique' => 'El usuario :attribute ya esta registrado.',
+            'user.min' => 'El :attribute debe de tener como minimo :min digitos.',
+            'pass.min' => 'El :attribute debe de tener como minimo :min digitos.',
+
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
+
+        
+
+        // proceso de validacion
+        if ($validator->fails()) {
+            return \Redirect::to('alumno/create')
+                ->withErrors($validator);
+        } else {
+            // obtener imagen
+            $identicon = new \Identicon\Identicon();
         $imageData = $identicon->getImageData(\Input::get('user'). \Input::get('mail'), 128);
         $avatar_name = uniqid();
         $avatar_name = $avatar_name .'.png';
         $destino = '/images/avatares/';
         \Storage::put($avatar_name, $imageData);
         file_put_contents(getcwd().$destino.$avatar_name, \Storage::get($avatar_name));
-
-        $validator = \Validator::make(\Input::all(), $rules);
-        // proceso de login
-        if ($validator->fails()) {
-            return \Redirect::to('alumno/create')
-                ->withErrors($validator);
-        } else {
+        
             // guardar
             $alumno = new Alumno;      
             // $alumno->id           = $new_id;
@@ -131,17 +152,26 @@ class AlumnoController extends Controller
         $rules = array(
             'nombre'    => 'required',           
             'apellidos' => 'required',    
-            'mail'      => 'required|email',
-            'user'      => 'required|min:2',
-            'pass'      => 'required|min:2',
+            'mail'      => 'required|email|unique:alumno',
+            'user'      => 'required|min:6|unique:alumno',
+            'pass'      => 'required|min:6',
             'centro_id' => 'required',
-            'profesor_id' => 'required'
+            'profesor_id' => 'required',
             // 'nacimiento'=> 'required'
         );
-        $validator = \Validator::make(\Input::all(), $rules);
+        $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'email' => 'La dirección de correo :attribute debe ser un email valido.',
+            'email.unique' => 'La dirección de correo :attribute ya esta registrada.',
+            'user.unique' => 'El usuario :attribute ya esta registrado.',
+            'user.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'pass.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
+
         // proceso de login
         if ($validator->fails()) {
-            return \Redirect::to('alumno/' . $id . 'edit')
+            return \Redirect::to('alumno/' . $id . '/edit')
                 ->withErrors($validator);
         } else {
             // guardar
@@ -154,6 +184,8 @@ class AlumnoController extends Controller
             $alumno->pass         = \Input::get('pass');
             $alumno->centro_id    = \Input::get('centro_id');
             $alumno->profesor_id    = \Input::get('profesor_id');
+
+            // dd($alumno);
             $alumno->save();
 
             // redirect

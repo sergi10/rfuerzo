@@ -15,8 +15,8 @@
 	<strong>Profesores: </strong>
 	<table id="profesores_centro" class="table table-striped table-bordered" cellspacing="6" width="35%">
 			<thead>
-                <th>Nombre</th>
-                <th></th>
+                <th style="width: 55%">Nombre</th>
+                <th style="width: 35%"></th>
                 <th></th>
             </tr>
         </thead> 
@@ -33,7 +33,7 @@
 		</tbody>
 	</table>
 </div>
-<div class="row">
+<div class="row col-md-2 pull-right">
     	<a class="btn btn-small btn-primary" href="{{ URL::to('profesor/create') }}"> 
 		<i class="glyphicon glyphicon-plus"></i> Nuevo Profesor </a>
 </div>
@@ -42,8 +42,8 @@
 		<strong>Alumnos: </strong>
 		 <table id="alumnos_centro" class="table table-striped table-bordered" cellspacing="6" width="35%">
 			<thead>
-                <th>Nombre</th>
-                <th></th>
+                <th style="width: 55%">Nombre</th>
+                <th style="width: 35%"></th>
                 <th></th>
             </tr>
         </thead> 
@@ -61,12 +61,12 @@
 		</tbody>
 		</table>
 		</div>
-		<div class="row">
+		<div class="row col-md-2 pull-right">
     <a class="btn btn-small btn-primary" href="{{ URL::to('alumno/create') }}"> 
 <i class="glyphicon glyphicon-plus"></i> Nuevo Alumno </a>
         </div>
 </br> 
-<div class="row">
+<div class="row col-md-2 pull-right">
 	<a href="{!!  URL::to('centro') !!}"><i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Volver</i></a>
 </div>
 @stop

@@ -35,18 +35,7 @@ class Notas extends Model
         return $tarea = Tarea::find($this->tarea_id);
          
     }
-    // public function my_mapa(){
-    //     $tarea = \DB::table('tarea')
-    //                 ->where('id','=',$this->tarea_id)
-    //                 ->get();
-
-    //     $mapa = \DB::table('mapa')
-    //                 ->where('id', '=', $tarea->mapa_id)
-    //                 ->get();
-    //     dd($tarea,  $mapa);
-    //     // return $tarea = Mapa::find($this::my_tarea()->mapa_id);
-    //     return $mapa;
-    // }
+    
     public function my_tema(){
         $tarea = \DB::table('tarea')
                     ->where('id','=',$this->tarea_id)
@@ -56,7 +45,7 @@ class Notas extends Model
                     ->where('id', '=', $tarea->tema_id)
                     ->get();
         dd($tarea,  $tema);
-        // return $tarea = Mapa::find($this::my_tarea()->tema_id);
+        // return $tarea = Tema::find($this::my_tarea()->tema_id);
         return $tema;
     }
 

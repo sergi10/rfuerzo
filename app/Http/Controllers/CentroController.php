@@ -41,10 +41,19 @@ class CentroController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'nombre' => 'required',
-            'direccion' => 'required'
+            'nombre' => 'required|min:6|unique:centro',
+            'direccion' => 'required|min:6|unique:centro'
         );
-        $validator = \Validator::make(\Input::all(), $rules);
+        $messages = array(
+
+            'required' => 'El campo :attribute es obligatorio.',
+            'nombre.unique' => 'La dirección de correo :attribute ya esta registrada.',
+            'direccion.unique' => 'El usuario :attribute ya esta registrado.',
+            'nombre.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'direccion.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
+
         // proceso de login
         if ($validator->fails()) {
             return \Redirect::to('centro/create')
@@ -107,13 +116,20 @@ class CentroController extends Controller
     public function update(Request $request, $id)
     {
          $rules = array(
-            'nombre' => 'required',
-            'direccion' => 'required'
+            'nombre' => 'required|min:6|unique:centro',
+            'direccion' => 'required|min:6|unique:centro'
         );
-        $validator = \Validator::make(\Input::all(), $rules);
-        // proceso de login
+        $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'nombre.unique' => 'La dirección de correo :attribute ya esta registrada.',
+            'direccion.unique' => 'El usuario :attribute ya esta registrado.',
+            'nombre.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'direccion.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
+// proceso de login
         if ($validator->fails()) {
-            return \Redirect::to('centro/' . $id . 'edit')
+            return \Redirect::to('centro/' . $id . '/edit')
                 ->withErrors($validator);
         } else {
             // guardar

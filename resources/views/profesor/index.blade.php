@@ -39,15 +39,14 @@
                     {!! Form::open(array('url' => 'profesor/' . $value->id, 'class' => 'pull-right ')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
                     
-                    {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger glyphicon glyphicon-remove')) !!}
-                    <i class="glyphicon glyphicon-remove"></i>
+                    {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger ')) !!}
                 {!! Form::close() !!}
                 </td>
             </tr>
             @endforeach 
         </tbody>
     </table>
-    <div class="row">
+     <div class="row col-md-2 pull-right">
     <a class="btn btn-small btn-primary" href="{{ URL::to('profesor/create') }}"> 
 <i class="glyphicon glyphicon-plus"></i> Nuevo Profesor </a>
         </div>

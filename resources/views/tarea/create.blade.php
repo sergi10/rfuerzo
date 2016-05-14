@@ -5,45 +5,51 @@
 @section('content')
 	<h2>Crear Tarea:</h2>  
     
-    {{-- 'nombre', 'descripcion', 'file', 'audio', 'enlace_imagen_imagen', 'enlace_imagen_audio', 'mapa_id' --}}
+    {{-- 'nombre', 'descripcion', 'file', 'audio', 'enlace_imagen_imagen', 'enlace_imagen_audio', 'tema_id' --}}
 
-    {{-- {!! Html::ul($errors -> all())  !!} --}}
+    {!! Html::ul($errors -> all(),['class' => 'caja_errores col-md-4']) !!}
+{{--     
     <ul>
             @foreach($errors->all() as $error)
-                <li>{!!  $error  !!}</li>
+                <li class="caja_errores col-md-9">{!!  $error  !!}</li>
             @endforeach
-        </ul>
+     </ul> 
+--}}
     {!! Form::open(array('url' => 'tarea', 'method' => 'post', 'files'=> true)) !!}
-    <div class="for-horizontal">
+    <div class="form-horizontal">
             <div class="form-group">
             {!! Form::label('nombre', 'Titulo', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9 col-sm-offset-1">
-                    {!! Form::text('nombre', Input::old('nombre'), ['class' => 'form-control']) !!}
+                    {!! Form::text('nombre', Input::old('nombre'), $attributes = $errors->has('nombre') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
             </div>
              <div class="form-group">
             {!! Form::label('descripcion', 'Descripcion', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9 col-sm-offset-1">
-                    {!! Form::text('descripcion', Input::old('descripcion'), ['class' => 'form-control']) !!}
+                    {!! Form::textarea('descripcion', Input::old('descripcion'), $attributes = $errors->has('nombre') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
             </div>             
             <div class="form-group">
             {!! Form::label('file', 'File', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9 col-sm-offset-1">
-                    {!! Form::file('file', Input::old('file'), ['class' => 'form-control']) !!}
+                    {!! Form::file('file', Input::old('file'), $attributes = $errors->has('file') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
             </div>
         </br>
             <div class="form-group">
-            {!! Form::label('mapa_id', 'Mapa', ['class' => 'col-sm-2 control-label']) !!}
+            {!! Form::label('tema_id', 'tema', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9 col-sm-offset-1">
-                    {!! Form::select('mapa_id', $mapas) !!}
+                    {!! Form::select('tema_id', $temas) !!}
                 </div>
             </div>
-            <div class="row">
-            {!! Form::submit('Guardar', ['class' => 'btn btn-small btn-primary']) !!}
-            <a href="{!!  URL::previous() !!}"><i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Cancelar</i></a>
-        </div>
+            <div class="form-group col-md-6 pull-right">
+                 <div class="form-group col-md-3">
+                    {!! Form::submit('Guardar', ['class' => 'btn btn-small btn-primary']) !!}
+                </div>
+                 <div class="form-group col-md-3">
+                    <a href="{!!  URL::previous() !!}"><i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Cancelar</i></a>
+                </div>
+            </div>
     </div>
     {!!  Form::close()  !!} 
 

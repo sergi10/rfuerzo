@@ -34,14 +34,14 @@
                     {!! Form::open(array('url' => 'tema/' . $value->id, 'class' => 'pull-right ')) !!}
                     {!! Form::hidden('_method', 'DELETE') !!}
                     
-                    {!! Form::submit('Borrar', array('class' => 'glyphicon glyphicon-remove btn btn-small btn-danger ',' glyphicon glyphicon-remove')) !!}
+                    {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger')) !!}
                 {!! Form::close() !!}
                 </td>
             </tr>
             @endforeach 
         </tbody>
     </table>
-    <div class="row">
+    <div class="row col-md-2 pull-right">
     <a class="btn btn-small btn-primary" href="{{ URL::to('tema/create') }}"> 
 <i class="glyphicon glyphicon-plus"></i> Nuevo Tema </a>
         </div>

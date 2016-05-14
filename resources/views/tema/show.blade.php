@@ -18,7 +18,6 @@ responsiveVoice.setDefaultVoice("Spanish Female");
 	<div class="row">
 			<h2><strong>Tema:</h2> 
 <img src="../images/temas/{!! $datos -> enlace !!}" alt="{!! $datos -> titulo !!}" class="img-responsive img-rounded"  width="200"></img>
-<img src="images/temas/{!! $datos -> enlace !!}" alt="{!! $datos -> titulo !!}" class="img-responsive img-rounded"  width="200"></img>
 </div>
 	{{-- <div class="row">
 			<a href="http://translate.google.com/translate_tts?tl=es&q=prueba de lectura de texto&client"><i class="glyphicon glyphicon-volume-up ">audio:</i></a><br>
@@ -58,12 +57,15 @@ responsiveVoice.setDefaultVoice("Spanish Female");
 <div class="row">
 <a  href="{{ URL::to('../tareas/lengua_historia_separación_sílabas_paleolítico.jqz?pw=600&amp;ph=450') }}" class="default_popup"><i class=" btn btn-default glyphicon glyphicon-th-list"> Tarea JQZ</i></a>
 </div> --}}
-<div class="row">
+<div class="row col-md-2 pull-right">
 	<a class="btn btn-small btn-primary" href="{{ URL::to('tarea/create') }}"> 
 	<i class="glyphicon glyphicon-plus"></i> Nueva Tarea </a>
+</div>
+
+<div class="row col-md-2 pull-right">	
 	<a  href="{{ URL::to('tema') }}"><i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Volver</i></a>
 </div>
-<script>
-$('.default_popup').popup();
-</script>
+ <script>
+ $('.default_popup').popup();
+ </script>
 @stop	

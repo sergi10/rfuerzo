@@ -57,20 +57,19 @@ class TemaController extends Controller
     public function store(Request $request)
     {
        $rules = array(
-            'titulo'    => 'required',           
+            'titulo'    => 'required|min:6|unique:tema',           
             'descripcion' => 'required',    
             'enlace'      => 'required',
             'profesor_id' => 'required'
         );
-        $archivo = \Input::file('enlace');
-        $nombre = uniqid();
-        // $nombre = $nombre .'.png';
-        // $nombre = $nombre .'.png';
-        $nombre =  \Input::file('enlace')->getClientOriginalName();
-        $destino = '/images/temas/';
-        \Storage::put($nombre, $archivo);
-        file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
-        // dd($archivo, $nombre, $destino, \Storage::get($archivo));         
+             $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'tema.unique' => 'El tema :attribute ya esta registrado.',
+            'tema.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
+       
+          // dd($archivo, $nombre, $destino);         
         // \Storage::put($archivo, \Input::get('imagen'));
         // file_put_contents(getcwd().$destino.$archivo, \Storage::get($archivo));
         
@@ -78,12 +77,22 @@ class TemaController extends Controller
         // \Storage::put($nombre, $archivo);
         // file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
         // $file->move(getcwd().$destino, $nombre);
-        $validator = \Validator::make(\Input::all(), $rules);
+        
         // proceso de login
         if ($validator->fails()) {
             return \Redirect::to('tema/create')
                 ->withErrors($validator);
         } else {
+            // obtener imagen
+            $archivo = \Input::file('enlace');
+            $nombre = uniqid();
+            // $nombre = $nombre .'.png';
+            // $nombre = $nombre .'.png';
+            $nombre =  \Input::file('enlace')->getClientOriginalName();
+            $destino = '/images/temas/';
+            \Storage::put($nombre, $archivo);
+            file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
+          
             // guardar
             $tema = new Tema;            
             // $tema->id                = $new_id;
@@ -135,32 +144,35 @@ class TemaController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $rules = array(
-            'titulo'    => 'required',           
+        $rules = array(
+            'titulo'    => 'required|min:6|unique:tema',           
             'descripcion' => 'required',    
-            'enlace'      => 'required',
-            // 'imagen'      => 'required',
-            // 'audio'      => 'required',
             'profesor_id' => 'required'
         );
-        $validator = \Validator::make(\Input::all(), $rules);
-        // proceso de login
+             $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'tema.unique' => 'El tema :attribute ya esta registrado.',
+            'tema.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
+       
+       // proceso de login
         if ($validator->fails()) {
-            return \Redirect::to('tema/' . $id . 'edit')
+            return \Redirect::to('tema/' . $id . '/edit')
                 ->withErrors($validator);
         } else {
             // guardar
-            $tema = Mapa::find($id);
+            $tema = Tema::find($id);
             $tema->titulo               = \Input::get('titulo');
             $tema->descripcion          = \Input::get('descripcion');
             // $tema->imagen               = \Input::get('imagen');
             // $tema->audio                = \Input::get('audio');
-            $tema->enlace               = \Input::get('enlace');
+            // $tema->enlace               = \Input::get('enlace');
             $tema->profesor_id          = \Input::get('profesor_id');
             $tema->save();
 
             // redirect
-            \Session::flash('message', 'El Mapa ' . $tema->titulo . ' ha sido actualizado!');
+            \Session::flash('message', 'El Tema ' . $tema->titulo . ' ha sido actualizado!');
             return \Redirect::to('tema');
         }
     }

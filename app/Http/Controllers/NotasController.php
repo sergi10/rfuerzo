@@ -49,7 +49,12 @@ class NotasController extends Controller
             'tarea_id' => 'required',    
             'nota'      => 'required|regex:/^\d*(\,\d{2})?$/',
         );
-         $validator = \Validator::make(\Input::all(), $rules);
+          $messages = array(
+            'required' => 'El campo :attribute es obligatorio.',
+            'required.regex' => 'El campo :attribute solo admite valores numericos.\n p. ej.: 8,50.',
+          
+        );
+        $validator = \Validator::make(\Input::all(), $rules, $messages);
         // proceso de login
         if ($validator->fails()) {
             return \Redirect::to('alumno/create')
@@ -71,7 +76,7 @@ class NotasController extends Controller
                 $nota = new Notas;      
                 // $notas->id           = $new_id;
                 $nota->alumno_id       = \Input::get('alumno_id');
-                $nota->tarea_id       = \Input::get('tarea_id');
+                $nota->tarea_id        = \Input::get('tarea_id');
                 $nota->nota            = \Input::get('nota');
                 $nota->save();
                 \Session::flash('message', 'La nota ' . $nota->nota . ' ha sido creado!');
