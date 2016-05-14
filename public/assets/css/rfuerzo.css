@@ -1,0 +1,29 @@
+.form-group{
+
+	margin: .5em;
+}
+.erroneo{
+	border: 1px solid #9f1d2c;
+
+ 	-webkit-box-shadow: inset 0 0 0  2px #cf6767;
+ 	-moz-box-shadow: inset 0 0 0  2px #cf6767;
+ 	box-shadow: inset 0 0 0  2px #cf6767;
+	/*background-color:  #cf6767;*/
+}
+
+.caja_errores{
+ 	border: 1px solid #9f1d2c;
+ 	-webkit-box-shadow: inset 0 0 0  2px #cf6767;
+ 	-moz-box-shadow: inset 0 0 0  2px #cf6767;
+ 	box-shadow: inset 0 0 0  2px #cf6767;
+}
+.fila_error{
+	margin: 1em;
+	padding: 0.5em;
+	border: 0.2em solid gray;
+
+}
+.form-horizontal{
+	margin-top: 2em;
+}
+
