@@ -1,0 +1,4 @@
+Habilitar la extensioin fielinfo.dll de Xampp
+	extension=php_fileinfo.dll
+Configurando el sistema de archivos
+	Editar: config/filesystems.php
