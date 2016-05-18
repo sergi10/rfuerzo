@@ -8,8 +8,8 @@
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h1> <strong class="label label-default">La Lengua de los Mapas
-					<img src="../images/icon/logo.png" class="img-responsive" alt="Logo La Lengua de los Mapas" width="64" style="display: inline;"></img></strong>
+					<h1> <strong class="label label-default">RFuerzo  
+					<img src="../images/icon/logo.png" class="img-responsive" alt="Logo La Lengua de los Mapas" width="64" style="display: inline;"></img></strong><small> la plataforma de apoyo al aprendizaje</small>
 					</h1>
 				</div>
 				<div class="panel-body" >					
@@ -21,9 +21,9 @@ continúa reflejando la historia, ya que la historia se ve en el espejo que
 proporcionan los libros de literatura." Estas palabras de Elise Wile, profesora en
 Carolina del norte, unidas al interés por la informática y las nuevas tecnologías;
 y a la consciencia de la necesidad de renovación de las técnicas y materiales
-didácticos; han sido los motores que han impulsado esta página web.</p>
+didácticos; han sido los motores que han impulsado esta aplicación web.</p>
 <p class="lead text-justify" style="padding: 1em">
-La lengua de los mapas es una aproximación a la transversalidad y a la
+RFuerzo es una aproximación a la transversalidad y a la
 nueva realidad de las aulas. Es un intento de dar un paso más en la docencia
 por ámbitos. Es, en definitiva, un lugar con el que pretendemos ayudar al
 alumnado y al profesorado a aprender y evolucionar juntos.</p>

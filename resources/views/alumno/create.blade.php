@@ -91,9 +91,11 @@
 {{-- <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script> --}}
 <script type="text/javascript">
     $(function(){
-
-        $('#calendario').datepicker({
-            dateFormat: "dd-mm-yy"
+        $('#calendario').Zebra_DatePicker({
+            // always_visible: $('#cal'),
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            first_day_of_week: 1,            
         });
     });
 </script>

@@ -9,7 +9,7 @@ use App\Notas;
 use App\Profesor;
 
 
-class Alumno extends Model
+class Alumno extends Model 
 {
     //
     protected $table = 'alumno';
@@ -73,4 +73,5 @@ public function profesor(){
 		// dd($notas, $puntuacion);
 		return $puntuacion;
 	}
+
 }

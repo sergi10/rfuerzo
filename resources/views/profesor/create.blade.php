@@ -60,6 +60,12 @@
                     {!! Form::select('centro_id', $centros) !!}
                 </div>
             </div>
+            <div class="form-group ">
+            {!! Form::label('es_admin', 'Es Administrador', ['class' => 'col-sm-2 control-label']) !!}
+                <div class="col-md-1 col-md-offset-1">
+                    {!! Form::checkbox('es_admin', 0, false, ['class' => 'form-control col-md-1 ']) !!}
+                </div>
+            </div>
            <div class="form-group col-md-6 pull-right">  
                 <div class="form-group col-md-3">
                     {!! Form::submit('Guardar', ['class' => 'btn btn-small btn-primary']) !!}
@@ -72,11 +78,12 @@
     {!!  Form::close()  !!} 
     <script type="text/javascript">
     $(function(){
-
-        $('#calendario').datepicker({
-            dateFormat: "dd-mm-yy"
+        $('#calendario').Zebra_DatePicker({
+            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            first_day_of_week: 1,            
+            });
         });
-    });
 </script>
 
 @stop

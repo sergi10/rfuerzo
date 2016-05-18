@@ -10,8 +10,10 @@ use App\Http\Controllers\Controller;use App\Alumno;
 // use App\Alumno;
 use App\Centro as Centro;
 use App\Profesor as Profesor;
+use App\User as User;
 // use App\DB as DB;
 use DB;
+use Hash;
 class AlumnoController extends Controller
 {
         /**
@@ -22,7 +24,7 @@ class AlumnoController extends Controller
     public function index()
     {
         // 'nombre','apellidos','mail','user','pass','avatar', 'nacimiento',  'centro_id', 'enlace_avatar'
-        $alumnos = Alumno::all()->simplePaginate(15);
+        $alumnos = Alumno::all(); //->simplePaginate(15);
 
         // prueba de paginación
           // $alumnos = Alumno::paginate(2);
@@ -91,18 +93,24 @@ class AlumnoController extends Controller
         
             // guardar
             $alumno = new Alumno;      
+            $user = new User;      
             // $alumno->id           = $new_id;
             $alumno->nombre       = \Input::get('nombre');
             $alumno->apellidos    = \Input::get('apellidos');
             $alumno->mail         = \Input::get('mail');
-            $alumno->user         = \Input::get('user');
             $alumno->nacimiento   = \Input::get('nacimiento');
-            $alumno->pass         = \Input::get('pass');
+            $alumno->user         = \Input::get('user');            
+            $user->name           = \Input::get('user');
+            // $user->password       = bcrypt( \Input::get('pass'));
+            $user->password       = Hash::make(\Input::get('pass'));
+            $user->level          =  0;
+            // $user->pass         = bcrypt( \Input::get('pass'));
+            // $alumno->pass         = \Input::get('pass');
             $alumno->centro_id    = \Input::get('centro_id');
-            $alumno->profesor_id    = \Input::get('profesor_id');
+            $alumno->profesor_id  = \Input::get('profesor_id');
             $alumno->enlace_avatar= $avatar_name;
+            $user->save();
             $alumno->save();
-
             // $movie = new Movie;
             // $movie->create($request->all());
             // redirect

@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Profesor as Profesor;
 use App\Centro as Centro;
 use App\Tema as Tema;
+use App\User as User;
+
 
 class ProfesorController extends Controller
 {
@@ -56,8 +58,8 @@ class ProfesorController extends Controller
         );
          $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
-            'email' => 'La dirección de correo :attribute debe ser un email valido.',
-            'email.unique' => 'La dirección de correo :attribute ya esta registrada.',
+            'email' => 'La dirección de correo debe ser un email valido.',
+            'email.unique' => 'La dirección de correo ya esta registrada.',
             'user.unique' => 'El usuario :attribute ya esta registrado.',
             'user.min' => 'El :attribute debe de tener como minimo :min digitos.',
             'pass.min' => 'El :attribute debe de tener como minimo :min digitos.',
@@ -81,7 +83,6 @@ class ProfesorController extends Controller
         file_put_contents(getcwd().$destino.$avatar_name, \Storage::get($avatar_name));
 
             // guardar
-            $profesor = new Profesor;
             // $theId = \DB::getPdo()->lastInsertId(); 
             // // dd($theId) ;
             // $new_id = 0;
@@ -90,14 +91,28 @@ class ProfesorController extends Controller
             // }
             
             // $profesor->id           = $new_id;
+            $profesor = new Profesor;
+            $user = new User;
+
             $profesor->nombre       = \Input::get('nombre');
             $profesor->apellidos    = \Input::get('apellidos');
             $profesor->mail         = \Input::get('mail');
-            $profesor->user         = \Input::get('user');
             $profesor->nacimiento   = \Input::get('nacimiento');
-            $profesor->pass         = \Input::get('pass');
             $profesor->centro_id    = \Input::get('centro_id');
-            $profesor->enlace_avatar    = $avatar_name;
+            $profesor->enlace_avatar= $avatar_name;
+            $profesor->user         = \Input::get('user');
+            $user->name             = \Input::get('user');
+            $user->password         = bcrypt( \Input::get('pass'));
+            $admin = (\Input::has('es_admin')) ? true : false;// ? true : false;
+            // $admin = $user->level;
+            if ($admin){
+                $user->level            =  2;
+            }
+            else{
+                $user->level            =  1;
+            }
+            // dd($user,$profesor,$admin);
+            $user->save();
             $profesor->save();
 
             // $movie = new Movie;
