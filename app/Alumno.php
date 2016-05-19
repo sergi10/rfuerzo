@@ -28,6 +28,11 @@ class Alumno extends Model
 		return $centro = Centro::find($this->centro_id) -> nombre;
 		 
 	}
+	public function my_nombre(){	
+		$nombre = $this->nombre .' '. $this->apellidos;
+		return $nombre;
+		 
+	}
 
 public function profesor(){
 

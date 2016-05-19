@@ -14,6 +14,7 @@
                 <th>Tema</th>
                 {{-- <th>audio</th> --}}
                 <th>Profesor</th>
+                <th style="width: 30%"></>
             </tr>
         </thead> 
         <tbody>
@@ -29,12 +30,13 @@
                 <td>
                     <a class="btn btn-small btn-success" href="{{ URL::to('tema/' . $value->id) }}"> 
                         <i class="glyphicon glyphicon-eye-open"></i> Ver </a>
-                    <a class="btn btn-small btn-info" href="{{ URL::to('tema/' . $value->id . '/edit') }}">
-                    <i class="glyphicon glyphicon-pencil"></i> Editar </a>
-                    {!! Form::open(array('url' => 'tema/' . $value->id, 'class' => 'pull-right ')) !!}
-                    {!! Form::hidden('_method', 'DELETE') !!}
-                    
-                    {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger')) !!}
+                    @if ((Auth::level() > 1) |(Auth::get_owner() == $value->profesor_id))
+                        <a class="btn btn-small btn-info" href="{{ URL::to('tema/' . $value->id . '/edit') }}">
+                        <i class="glyphicon glyphicon-pencil"></i> Editar </a>
+                        {!! Form::open(array('url' => 'tema/' . $value->id, 'class' => 'pull-right ')) !!}
+                        {!! Form::hidden('_method', 'DELETE') !!}                    
+                        {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger')) !!}
+                    @endif
                 {!! Form::close() !!}
                 </td>
             </tr>

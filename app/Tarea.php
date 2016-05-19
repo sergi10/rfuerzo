@@ -13,8 +13,6 @@ class Tarea extends Model
   protected $table = 'tarea';
 	protected $fillable = array('nombre', 'descripcion', 'enlace_tarea', 'tema_id');
 	protected $guarded = array('id');
-	// protected $hidden = array('enlace','enlace_audio');
-	// protected $hidden = array('created_at','updated_at');
 	public $timestamps =  false;
 	
 	

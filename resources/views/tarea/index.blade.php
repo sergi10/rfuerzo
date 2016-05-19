@@ -32,20 +32,23 @@
                 <td>
                     <a class="btn btn-small btn-success" href="{{ URL::to('tarea/' . $value->id) }}"> 
                         <i class="glyphicon glyphicon-eye-open"></i> Ver </a>
+                @if ((Auth::level() > 1) | (Auth::get_owner() == $value->my_tema()->profesor_id))
                     <a class="btn btn-small btn-info" href="{{ URL::to('tarea/' . $value->id . '/edit') }}">
                     <i class="glyphicon glyphicon-pencil"></i> Editar </a>
                     {!! Form::open(array('url' => 'tarea/' . $value->id, 'class' => 'pull-right ')) !!}
-                    {!! Form::hidden('_method', 'DELETE') !!}
-                    
-                    {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger')) !!}                    
+                    {!! Form::hidden('_method', 'DELETE') !!}                    
+                    {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger')) !!}  
+                @endif                  
                 {!! Form::close() !!}
                 </td>
             </tr>
             @endforeach 
         </tbody>
     </table>
+    @if (Auth::level() > 0)
     <div class="row col-md-2 pull-right">
     <a class="btn btn-small btn-primary" href="{{ URL::to('tarea/create') }}"> 
 <i class="glyphicon glyphicon-plus"></i> Nueva Tarea </a>
         </div>
+        @endif
 @stop

@@ -26,11 +26,12 @@
 				<a class="navbar-brand" href="{{URL::to('/alumno')}}">Alumnos</a>
 				@endif
 				<a class="navbar-brand" href="{{URL::to('/about')}}">About</a>
-				<span class="float-right" style="margin-left: 20em;">
+				<span class=" navbar-brand float-right" style="margin-left: 20em;">
 					@if (Auth::check())
-						<a class="navbar-brand glyphicon glyphicon-log-out float-right" href="{{URL::to('auth/logout')}}">logout</a>
+					<span class="float-right">{{Auth::user()->name}}</span>
+						<a href="{{URL::to('auth/logout')}}">logout<i class="glyphicon glyphicon-log-out"></i></a>
 					@else
-						<a class="navbar-brand glyphicon glyphicon-user float-right" href="{{URL::to('auth/login')}}">login</a>
+						<a href="{{URL::to('auth/login')}}">login<i class="glyphicon glyphicon-user"></i></a>
 					@endif
 				</span>				        
 				

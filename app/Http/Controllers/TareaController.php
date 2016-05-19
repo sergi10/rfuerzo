@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\Tarea as Tarea;
 use App\Tema as Tema;
-
+use Auth;
 
 class TareaController extends Controller
 {
@@ -32,7 +32,10 @@ class TareaController extends Controller
      */
     public function create()
     {
-        
+        // $_id = Auth::get_owner();
+        // $todos_temas = Tema::where('profesor_id', '=',$_id)->get()->all();        
+        // $temas = $todos_temas::lists('titulo', 'id');
+        // dd($todos_temas, $temas);
         $temas = Tema::lists('titulo', 'id');
         return \View::make('tarea.create', array('temas'=>$temas));
     }
@@ -140,9 +143,9 @@ class TareaController extends Controller
     public function update(Request $request, $id)
     {
           $rules = array(
-            'nombre'        => 'required|min:6|unique:tarea',          
+            'nombre'        => 'required|min:6',          
             'descripcion'   => 'required|min:6', 
-            'tema_id'       => 'required'
+            // 'tema_id'       => 'required'
         );
         $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
@@ -164,7 +167,7 @@ class TareaController extends Controller
             // $tarea->file                 = \Input::get('file');
             // $tarea->audio                = \Input::get('audio');
             // $tarea->enlace_imagen               = \Input::get('enlace_imagen');
-            $tarea->tema_id              = \Input::get('tema_id');
+            // $tarea->tema_id              = \Input::get('tema_id');
             $tarea->save();
 
             // redirect

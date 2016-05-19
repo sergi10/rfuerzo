@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Alumno as Alumno;
+use App\Profesor as Profesor;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -37,7 +38,6 @@ class AuthController extends Controller
      */
     public function __construct(Guard $auth)
     {
-        // $this->auth = $auth;
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
@@ -71,7 +71,6 @@ class AuthController extends Controller
     }
 
     public function getLogin(Request $request){
-        // dd('getLogin',$request);
         return view("auth/login");
     }
 
@@ -97,42 +96,27 @@ class AuthController extends Controller
                     'password'=>$request->input('pass'),
                 );
             if (Auth::attempt($datos_login)){
-                // $centro = Centro::find($profesor->centro_id);
-                $alumno = Alumno::where('user', '=',  $usuario)->get()->first();
-
-                // $alumno = Alumno::where('user', 'ilike', '\''.$usuario.'\'')->get();
-                // return ("El usuario y la contraseña SIIII son validos.");
-
-                // dd('Acceso OK', $alumno->nombre, $alumno->id);
-                return \Redirect::to('alumno/'.$alumno->id);
+                if (Auth::level() == 1){
+                    $profesor = Profesor::where('user', '=',  $usuario)->get()->first();
+                    return \Redirect::to('profesor/'.$profesor->id);
+                }
+                elseif (Auth::level() == 2) {
+                    $alumno = Alumno::where('user', '=',  $usuario)->get()->first();
+                    return \Redirect::to('alumno/');
+                }
+                else{
+                    $alumno = Alumno::where('user', '=',  $usuario)->get()->first();
+                    return \Redirect::to('alumno/'.$alumno->id);
+                }
             }
             else{
-                // dd('Acceso KKKOOO', $datos_login, $request);
-                // return ("El usuario o la contraseña NOOO son validos.");
-                // return \Redirect::intended('alumno');
-                // 123456 = $2y$10$YuTn
                 return \Redirect::to('auth/login')->withInput();
             }
         }
 
-        // $this->validate($request, [
-        //     'usuario' => 'required',
-        //     'pass' => 'required',    
-        //     ]); 
-        // $datos_login = $request->only('usuario','pass');
-
-        // if ($this->auth->attempt($datos_login, $request->has('remember'))){
-
-        //     return view("alumno");
-        // }
-
-        
-        // return view()->with("msjerror","El usuario o la contraseña NO son validos.")
     }
-    public function getLogout(Request $request){
-        // dd($request);
-        // $this -> auth->getLogout();
+    public function getLogout(Request $request){        
         Session::flush();
-        return redirect('home');
+        return  \Redirect::to('home');
     }
 }

@@ -19,15 +19,13 @@ responsiveVoice.setDefaultVoice("Spanish Female");
 	</div>
 
 	<div class="row">
-		<a  href="{{ URL::to('../tareas/'. $datos->enlace_tarea)}}" class="default_popup"><i class=" btn btn-default glyphicon glyphicon-list-alt "> {{ $datos -> nombre}}</i></a>
+		<a  href="{{ URL::to('../tareas/'. $datos->enlace_tarea)}}"><i class=" btn btn-default glyphicon glyphicon-list-alt "> {{ $datos -> nombre}}</i></a>
+    @if (Auth::level() > 0)
 		<a class="btn btn-small btn-primary" href="{{ URL::to('notas/create') }}"> 
 			<i class="glyphicon glyphicon-plus"></i> Añadir Nota </a>
+	@endif
+		<div class="row col-md-2 pull-right">
+			<a  href="{{ URL::to('tarea') }}"<i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Volver</i></a>
+		</div>
     </div>
-
-<div class="row col-md-2 pull-right">
-<a  href="{{ URL::to('tarea') }}"<i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Volver</i></a>
-</div>
- <script>
- $('.default_popup').popup();
- </script>
 @stop

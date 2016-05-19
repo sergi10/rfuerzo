@@ -38,12 +38,12 @@
                 </div>
             </div>
             <br>
-            <div class="form-group ">
+            {{-- <div class="form-group ">
             {!! Form::label('tema_id', 'Tema', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9  col-9 col-sm-offset-1">
                     {!! Form::select('tema_id', $temas) !!}
                 </div>
-            </div>    
+            </div>     --}}
        <div class="form-group col-md-6 pull-right">
                  <div class="form-group col-md-3">
                     {!! Form::submit('Guardar', ['class' => 'btn btn-small btn-primary']) !!}

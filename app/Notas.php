@@ -21,15 +21,20 @@ class Notas extends Model
 
         return $this->belongsToMany('App\Alumno');
     }
-     public function tareas(){
+    
+    public function tareas(){
 
         return $this->belongsToMany('App\Tarea');
     }
+    
     public function my_alumno(){
-        
-        return $alumno = Alumno::find($this->alumno_id);
-         
+        // $alumno = Alumno::where('id', '=',  $this->alumno_id)->get()->first();
+        $alumno = Alumno::find($this->alumno_id);
+        if ($alumno){
+            return $alumno;
+        }        
     }
+
     public function my_tarea(){
         
         return $tarea = Tarea::find($this->tarea_id);

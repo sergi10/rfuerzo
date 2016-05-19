@@ -145,9 +145,8 @@ class TemaController extends Controller
     public function update(Request $request, $id)
     {
         $rules = array(
-            'titulo'    => 'required|min:6|unique:tema',           
+            'titulo'    => 'required|min:6',           
             'descripcion' => 'required',    
-            'profesor_id' => 'required'
         );
              $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
@@ -168,7 +167,7 @@ class TemaController extends Controller
             // $tema->imagen               = \Input::get('imagen');
             // $tema->audio                = \Input::get('audio');
             // $tema->enlace               = \Input::get('enlace');
-            $tema->profesor_id          = \Input::get('profesor_id');
+            // $tema->profesor_id          = \Input::get('profesor_id');
             $tema->save();
 
             // redirect
