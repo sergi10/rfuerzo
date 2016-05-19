@@ -4,7 +4,9 @@
 @stop
 @section('content')
 
-	<h2>Informacion del Alumno:</h2>  
+	<h2>Informacion del Alumno:
+	{{$lvl = Auth::user()->level}}
+	</h2>  
 	<div class="jumbotron text-center">
 		<h2><strong>{{ $datos -> nombre }}</strong></h2>
 		<h2><strong>Avatar: </strong></h2>

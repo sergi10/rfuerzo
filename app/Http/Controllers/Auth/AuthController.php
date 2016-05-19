@@ -98,11 +98,12 @@ class AuthController extends Controller
                 );
             if (Auth::attempt($datos_login)){
                 // $centro = Centro::find($profesor->centro_id);
-                $alumno = Alumno::where('user', '=',  $usuario)->get();
+                $alumno = Alumno::where('user', '=',  $usuario)->get()->first();
+
                 // $alumno = Alumno::where('user', 'ilike', '\''.$usuario.'\'')->get();
                 // return ("El usuario y la contraseña SIIII son validos.");
 
-                // dd('Acceso OK', $alumno);
+                // dd('Acceso OK', $alumno->nombre, $alumno->id);
                 return \Redirect::to('alumno/'.$alumno->id);
             }
             else{
