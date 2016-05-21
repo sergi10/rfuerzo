@@ -9,25 +9,62 @@
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading"><h1> Modo de uso</h1></div>
+				<section>
 				<h2>Alumno</h2>
-				<div class="panel-body">
+					<article ="panel-body">
 					
-				</div>
+					</article>
+				</section>
+				<section>
 				<h2>Profesor</h2>
-				<div class="panel-body">
-					
-				</div>
+					<article class="panel-body">
+
+					</article>
+				</section>
+				<section>
 				<h2>Administrador</h2>
 				<div class="panel-body">
-					<span class ="label label-default">Hot Potatoes</span>
+					<article>
+					<header class ="label label-default">Hot Potatoes</header>
+					</br>
+					<a href="https://hotpot.uvic.ca/">Hot Potatoes</a> es un sistema para crear ejercicios educativos que pueden realizar posteriormente a través de la web. Los ejercicios que crea son del tipo respuesta corta, selección múltiple, rellenar los huecos, crucigramas, emparejamiento y variados. 
+					Su licencia no es libre, pero a partir del 1 de septiembre de 2009 se distribuye la versión sin limitaciones a través de la sección <a href="https://hotpot.uvic.ca/index.php#downloads">Descargas</a> de su sitio web.
+					Hot Potatoes está creado por el centro de humanidades y computación de la <a href="http://hcmc.uvic.ca/">Universidad de Victoria</a>, en Canadá. Para asuntos comerciales se ha creado la empresa Half-Baked Software Inc.
+
+					Consta de varios programitas o esquemas predeterminados (también los llamaremos simplememente "patatas") que sirven para la elaboración de diversos tipos de ejercicios interactivos multimedia.
+
+					Estos ejercicios se podrán publicar en un servidor Web y difundir a través de Internet, y ofrecen la gran ventaja de ser soportados por todos los navegadores modernos ( fuente: <a href="http://www.ite.educacion.es/formacion/materiales/62/cd/modulo_1_primeros_pasos/qu_es_hot_potatoes.html" title="Ministerio de Educación y Ciencia" >Instituto de Tecnologías Educativas</a>). En este enlace se puede leer una pequeña introducción al uso de esta herramienta.
+					<blockquote>
+						<li><a href="http://platea.pntic.mec.es/~iali/CN/HotPot60/tutorial.htm">Manual interactivo </a></li>
+						<li><a href="http://es.slideshare.net/adrysilvav/manual-hot-potatoes-6">Manual Hot Potatoes 6</a><footer> por Adriana Silva Villareal (Universidad de Madrid)</footer></li>
+						<li><a href="https://campusvirtual.uca.es/uca/es/show/docexterna/hot_potatoe2">Ejercicios de ejemplo</a><footer> Universidad de Cadiz</footer></li>
+					</blockquote>
+					</article>
+					<article>
+						<header class ="label label-default">Gestión de usuarios</header>
+						Desde los diferentes menus se puede realizar los distintos trabajos de mantenimiento de usuario y tareas. Un usuario administrador puede visualizar, crear, actualizar y borrar cualquier tipo de registro , precaución con los posibles perdidas de información.
+						</br>
+						<header class ="label label-default">Primer acceso</header>
+						Al realizar la importación de los datos de carga iniciales en la base de datos se crea automaticamente un usaurio adminRfuerzo con la contraseña: adminRfuerzo.
+						Una vez finalizada la instalación del sistema es recomendable cambiar dicha contraseña o crear un nuevo profesor con el rol de 'Administrador'.	
+
+					</article>
 				</div>
+			</section>
+			<section>
 				<h2> A cerca de mi</h2>
 				<div class="panel-body">
 					this is my home page
 				</div>
+			</section>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('[data-toogle="tooltip"]').tooltip();
+	});
+</script>
 	
 @stop

@@ -39,7 +39,7 @@
 						</li>
 						<li>
 							@if (Auth::es_admin())
-								<a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-danger">Administrador</a>
+								<a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-danger" id="adm_label" style="color: #EEE;">Administrador</a>
 							@endif
 							@if (Auth::level() == 1)
 								<a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-info">Profesor</a>

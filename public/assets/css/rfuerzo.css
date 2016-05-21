@@ -41,6 +41,9 @@
 .glyphicon-log-out:hover{
     color: #F35A04;
 }
+#adm_label:hover{
+    color: #777;
+}
 
 .perfil_alumno li{
     margin:0.75em;
@@ -127,3 +130,27 @@ h4 {
 li {
     list-style-type: none;
     }
+/*Seccion para formatear los textos del About*/
+article{
+    font-size: 1.2em;
+    color:  #222 ;
+    text-align: justify;
+    margin-left: 1em;
+    margin-right: 2em;
+}
+article header{
+    font-size: 1.6em;
+    color:  #AAA;
+    margin-top: 1.5em;
+}
+article footer{
+    margin-left: 2em;
+    color: #A1A1A1;
+    font-style: italic;
+}
+
+
+section{
+    margin-left: 1em;
+
+}
