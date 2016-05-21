@@ -34,7 +34,7 @@ class Alumno extends Model
 		 
 	}
 
-public function profesor(){
+	public function profesor(){
 
 		return $this->belongsTo('App\Profesor');
 	}
@@ -52,19 +52,7 @@ public function profesor(){
     }
 
     public function my_notas(){
-    	$notas = \DB::table('resultado_tarea')
-                    ->where('alumno_id', '=', $this->id)
-                    ->get();
-		// $notas = Notas::whereHas('alumno_id', function($q){
-			// $q->where('alumno_id', '=', $this->id );
-		// }) -> get();
-		// $notas = Notas::find($this->id);
-		// $notas = Notas::has('alumno_id', '=', $this->id)->get();
-		// $notas = Notas::with('alumno_id', '=', $this->id)->get();
-		// $notas = Notas::with(['alumno_id' => function($q){
-		// 	$q->where('alumno_id', '=', $this->id);
-		// }])->get();
-		// dd($notas);
+    	$notas = Notas::where('alumno_id', '=', $this->id)->get();    	
 		return $notas;
 		 
 	}
@@ -75,7 +63,6 @@ public function profesor(){
 		foreach ($notas as $nota){
 			$puntuacion += $nota->nota;
 		}
-		// dd($notas, $puntuacion);
 		return $puntuacion;
 	}
 

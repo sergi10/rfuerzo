@@ -20,18 +20,19 @@ class Profesor extends Model
 		return $this->belongsTo('App\Centro');
 	}
 
-	// public function mapas(){
-	
-	// 	return $this->hasMany('App\Mapa','profesor_id');
-	// }
 	public function temas(){
 	
 		return $this->hasMany('App\Tema','profesor_id');
 	}
+
 	public function my_centro(){
 		
 		return $centro = Centro::find($this->centro_id) -> nombre;
 		 
+	}
+	
+	public function alumnos(){
+		return $this->hasMany('App\Alumno','profesor_id');
 	}
 
 }

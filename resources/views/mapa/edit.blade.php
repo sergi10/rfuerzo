@@ -11,7 +11,7 @@
             @endforeach
         </ul>
     {!! Form::model($datos, array('route' => array('mapa.update', $datos->id), 'method' => 'PUT')) !!}
-    <div class="for-horizontal">
+    <div class="form-horizontal">
         
         <div class="form-group">
             {!! Form::label('titulo', 'Titulo', ['class' => 'col-sm-2 control-label']) !!}

@@ -3,17 +3,13 @@
 	Editar Centro
 @stop
 @section('content')
-	<h2>Editar Centro {{ $datos -> nombre}}:</h2>  
-    {!! Html::ul($errors -> all())  !!}
-    <ul>
-            @foreach($errors->all() as $error)
-                <li>{!!  $error  !!}</li>
-            @endforeach
-        </ul>
-        <br></br>
-<div></div>
+	<h2>Editar Centro {{ $datos -> nombre}}:</h2> 
+    @include('layout.errores')
+
+    <br></br>
+    <div></div>
     {!! Form::model($datos, array('route' => array('centro.update', $datos->id), 'method' => 'PUT')) !!}
-    <div class="for-horizontal">
+    <div class="form-horizontal">
             <div class="form-group">
             {!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9 col-sm-offset-1">
@@ -27,14 +23,7 @@
                 </div>
             </div>
     
-         <div class="form-group col-md-6 pull-right">  
-                <div class="form-group col-md-3">
-                    {!! Form::submit('Guardar', ['class' => 'btn btn-small btn-primary']) !!}
-                </div>
-                <div class="form-group col-md-3">
-                    <a href="{!!  URL::previous() !!}"><i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Cancelar</i></a>
-                </div>
-            </div>
+        @include('layout.enviar')          
     </div>
     {!!  Form::close()  !!} 
 @stop

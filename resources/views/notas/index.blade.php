@@ -34,8 +34,7 @@
                     <i class="glyphicon glyphicon-pencil"></i> Editar </a>
                     {!! Form::open(array('url' => 'notas/' . $value->id, 'class' => 'pull-right ')) !!} --}}
                     @if ((Auth::level() > 1) |(Auth::get_owner() == $value->my_alumno()->profesor_id))
-                        {!! Form::hidden('_method', 'DELETE') !!}
-                    
+                        {!! Form::hidden('_method', 'DELETE') !!}                    
                         {!! Form::submit('Borrar', array('class' => 'btn btn-small btn-danger')) !!}
                     @endif
                 {!! Form::close() !!}

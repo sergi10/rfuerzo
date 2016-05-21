@@ -164,12 +164,18 @@ class ProfesorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // if ($request){
+        //     dd('CON Datos', $request);
+        // }else{
+        //     dd('Error sin datos', $request);
+
+        // }
         $rules = array(
             'nombre'    => 'required',           
             'apellidos' => 'required',    
-            'mail'      => 'required|email|unique:profesor',
-            'user'      => 'required|min:6|unique:profesor',
-            'pass'      => 'required|min:6',
+            'mail'      => 'email',
+            'user'      => 'min:6',
+            'pass'      => 'min:6',
             'centro_id' => 'required'
             // 'nacimiento'=> 'required'
         );
@@ -190,15 +196,30 @@ class ProfesorController extends Controller
         } else {
             // guardar
             $profesor = Profesor::find($id);
-            $profesor->nombre       = \Input::get('nombre');
-            $profesor->apellidos    = \Input::get('apellidos');
-            $profesor->mail         = \Input::get('mail');
-            $profesor->user         = \Input::get('user');
-            $profesor->nacimiento   = \Input::get('nacimiento');
-            $profesor->pass         = \Input::get('pass');
-            $profesor->centro_id    = \Input::get('centro_id');
+            if (\Input::exists('nombre')){
+                $profesor->nombre         = \Input::get('nombre');                
+            }
+            if (\Input::exists('apellidos')){
+                $profesor->apellidos    = \Input::get('apellidos');
+            }
+            if (\Input::exists('mail')){
+                $profesor->mail         = \Input::get('mail');
+            }
+            if (\Input::exists('user')){
+                $profesor->user         = \Input::get('user');
+            }
+            if (\Input::exists('nacimiento')){
+                $profesor->nacimiento   = \Input::get('nacimiento');
+            }
+            if (\Input::exists('pass')){
+                $profesor->pass         = bcrypt(\Input::get('pass'));
+            }
+            if (\Input::exists('centro_id')){
+                $profesor->centro_id    = \Input::get('centro_id');
+            }
+            
             $profesor->save();
-
+            
             // redirect
             \Session::flash('message', 'El Profesor ' . $profesor->nombre . ' ha sido actualizado!');
             return \Redirect::to('profesor');

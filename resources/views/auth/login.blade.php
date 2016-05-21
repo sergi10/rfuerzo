@@ -6,11 +6,11 @@
 	@if (Input::old())
 			<div class"col-md-offset-4"><h2>Error de validación</h2></div>		
 	@endif
-    {!! Html::ul($errors -> all(),['class' => 'caja_errores col-md-4']) !!}
+    @include('layout.errores') 
     <br></br>
     
     {!! Form::open(array('url' => 'auth/login', 'method' => 'POST')) !!}
-    <div class="container">
+    <div>
         <div class="row">
             <div class="col-md-offset-4 col-md-4 ">
                 <div class="form-login">

@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Alumno as Alumno;
 use App\Tarea as Tarea;
 use App\Notas as Notas;
+use App\Tema as Tema;
+use Auth;
+
 class NotasController extends Controller
 {
     /**
@@ -30,9 +33,20 @@ class NotasController extends Controller
      */
     public function create()
     {
-        $alumnos = Alumno::lists('apellidos', 'id');
-        $tareas = Tarea::lists('nombre', 'id');
-        return \View::make('notas.create', array('tareas'=>$tareas, 'alumnos'=>$alumnos));
+        if (Auth::level() == 0){
+            $alumnos = Alumno::where('id', '=', Auth::get_alumno_id());
+        }else {
+            // $alumnos = Alumno::lists('apellidos', 'id');
+            $profe_id = Auth::get_owner();
+            $alumnos = Alumno::where('profesor_id', '=', $profe_id);
+            $temas = Tema::where('profesor_id', '=', $profe_id)->get()->toArray(); 
+            $tareas = Tarea::where('tema_id','in', $temas)->get()->all();
+        }
+        // dd($profe_id, $temas, $tareas);
+        // $list_tareas = $tareas->lists('nombre', 'id');
+        $list_tareas = Tarea::lists('nombre', 'id');
+        $list_alumnos = $alumnos->lists('nombre', 'id');
+        return \View::make('notas.create', array('tareas'=>$list_tareas, 'alumnos'=>$list_alumnos));
     }
 
     /**
@@ -47,17 +61,22 @@ class NotasController extends Controller
         $rules = array(
             'alumno_id'    => 'required',           
             'tarea_id' => 'required',    
-            'nota'      => 'required|regex:/^\d*(\,\d{2})?$/',
+            'nota'      => 'required|numeric|min:0|max:10.01',
         );
           $messages = array(
+            'min' => 'El campo :attribute debe tener un valor mayor de 0.',
+            'max' => 'El campo :attribute debe tener un valor máximo de 10.',
             'required' => 'El campo :attribute es obligatorio.',
             'required.regex' => 'El campo :attribute solo admite valores numericos.\n p. ej.: 8,50.',
           
         );
         $validator = \Validator::make(\Input::all(), $rules, $messages);
+        $validator->sometimes('nota', 'required|max:10', function($request) {
+            return $request->nota >0;
+        });
         // proceso de login
         if ($validator->fails()) {
-            return \Redirect::to('alumno/create')
+            return \Redirect::to('notas/create')
                 ->withErrors($validator);
         } else {
             $querynota = \DB::table('resultado_tarea')
@@ -81,12 +100,9 @@ class NotasController extends Controller
                 $nota->save();
                 \Session::flash('message', 'La nota ' . $nota->nota . ' ha sido creado!');
             }
-        }
-            // $movie = new Movie;
-            // $movie->create($request->all());
-            // redirect
+        }          
             
-            return \Redirect::to('notas');
+        return \Redirect::to('notas');
     }
 
 
@@ -135,6 +151,11 @@ class NotasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $nota = Notas::find($id);
+        $nota -> delete();
+
+        // redirect
+        \Session::flash('message', 'La nota ha sido borrada!');
+        return \Redirect::to('notas');
     }
 }

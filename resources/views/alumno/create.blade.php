@@ -5,7 +5,7 @@
 @section('content')
 	<h2>Crear Alumno:</h2>  
     {{-- 'id','nombre','apellidos','mail','user','pass','avatar', 'f-nac', 'centro_id' --}}
-    {!! Html::ul($errors -> all(),['class' => 'caja_errores col-md-4']) !!}
+    @include('layout.errores') 
 {{--     
     <ul>
             @foreach($errors->all() as $error)
@@ -51,15 +51,15 @@
              <div class="form-group">
             {!! Form::label('nacimiento', 'Nacimiento', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9 col-sm-offset-1">
-                    {!! Form::date('f-nac', \Carbon\Carbon::now(), $attributes = $errors->has('nacimiento') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
+                    {!! Form::date('nacimiento', \Carbon\Carbon::now(),array('id'=>'calendario'), $attributes = $errors->has('nacimiento') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
             </div>
-            <div class="form-group">
+           {{--  <div class="form-group">
             {!! Form::label('nacimiento_JQ', 'Nacimiento', ['class' => 'col-sm-2 control-label']) !!}
-                <div class="col-sm-9 col-sm-offset-1" id='calendario3'>
+                <div class="col-sm-9 col-sm-offset-1">
                     {!! Form::date('f-nac', '', array('id'=>'calendario'),$attributes = $errors->has('f-nac') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
-            </div>
+            </div> --}}
            
             <div class="form-group">
                  <div class="form-group  col-md-6">
@@ -77,27 +77,12 @@
             </div>
     
 
-            <div class="form-group col-md-6 pull-right">
-                 <div class="form-group col-md-3">
-                    {!! Form::submit('Guardar', ['class' => 'btn btn-small btn-primary']) !!}
-                </div>
-                 <div class="form-group col-md-3">
-                    <a href="{!!  URL::previous() !!}"><i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Cancelar</i></a>
-                </div>
-            </div>
+            @include('layout.enviar') 
         </div>
     {!!  Form::close()  !!} 
 {{-- <script src="//code.jquery.com/jquery-1.10.2.js"></script> --}}
 {{-- <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script> --}}
-<script type="text/javascript">
-    $(function(){
-        $('#calendario').Zebra_DatePicker({
-            // always_visible: $('#cal'),
-            months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-            days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-            first_day_of_week: 1,            
-        });
-    });
-</script>
+            @include('layout.zcalendar') 
+
 
 @stop

@@ -61,8 +61,8 @@ class AlumnoController extends Controller
             'user'      => 'required|min:6|unique:alumno',
             'pass'      => 'required|min:6',
             'centro_id' => 'required',
-            'profesor_id' => 'required'
-            // 'nacimiento'=> 'required'
+            'profesor_id' => 'required',
+            'nacimiento'=> 'required|date'
         );
         $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
@@ -71,6 +71,7 @@ class AlumnoController extends Controller
             'user.unique' => 'El usuario :attribute ya esta registrado.',
             'user.min' => 'El :attribute debe de tener como minimo :min digitos.',
             'pass.min' => 'El :attribute debe de tener como minimo :min digitos.',
+            'nacimiento.date' => 'El :attribute debe de ser uan fecha valida.',
 
         );
         $validator = \Validator::make(\Input::all(), $rules, $messages);
@@ -160,12 +161,10 @@ class AlumnoController extends Controller
         $rules = array(
             'nombre'    => 'required',           
             'apellidos' => 'required',    
-            'mail'      => 'required|email|unique:alumno',
-            'user'      => 'required|min:6|unique:alumno',
-            'pass'      => 'required|min:6',
-            'centro_id' => 'required',
-            'profesor_id' => 'required',
-            // 'nacimiento'=> 'required'
+            'mail'      => 'email',
+            'user'      => 'min:6',
+            'pass'      => 'min:6',
+            'nacimiento'=> 'date'
         );
         $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
@@ -174,6 +173,7 @@ class AlumnoController extends Controller
             'user.unique' => 'El usuario :attribute ya esta registrado.',
             'user.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
             'pass.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'nacimiento.date' => 'El :attribute debe de ser uan fecha valida.',
         );
         $validator = \Validator::make(\Input::all(), $rules, $messages);
 
@@ -184,15 +184,30 @@ class AlumnoController extends Controller
         } else {
             // guardar
             $alumno = Alumno::find($id);
-            $alumno->nombre       = \Input::get('nombre');
-            $alumno->apellidos    = \Input::get('apellidos');
-            $alumno->mail         = \Input::get('mail');
-            $alumno->user         = \Input::get('user');
-            $alumno->nacimiento   = \Input::get('nacimiento');
-            $alumno->pass         = \Input::get('pass');
-            $alumno->centro_id    = \Input::get('centro_id');
-            $alumno->profesor_id    = \Input::get('profesor_id');
-
+            if (\Input::exists('nombre')){
+                $alumno->nombre       = \Input::get('nombre');                
+            }
+            if (\Input::exists('apellidos')){
+                $alumno->apellidos    = \Input::get('apellidos');
+            }
+            if (\Input::exists('mail')){
+                $alumno->mail         = \Input::get('mail');
+            }
+            if (\Input::exists('user')){
+                $alumno->user         = \Input::get('user');
+            }
+            if (\Input::exists('nacimiento')){
+                $alumno->nacimiento   = \Input::get('nacimiento');
+            }
+            if (\Input::exists('pass')){
+                $alumno->pass         = bcrypt(\Input::get('pass'));
+            }
+            if (\Input::exists('centro_id')){
+                $alumno->centro_id    = \Input::get('centro_id');
+            }
+            if (\Input::exists('profesor_id')){
+                $alumno->profesor_id    = \Input::get('profesor_id');
+            }
             // dd($alumno);
             $alumno->save();
 

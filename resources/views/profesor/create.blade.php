@@ -6,7 +6,7 @@
 	<h2>Crear Profesor:</h2>  
     {{-- 'id','nombre','apellidos','mail','user','pass','avatar', 'f-nac', 'centro_id' --}}
     
-    {!! Html::ul($errors -> all(),['class' => 'caja_errores col-md-4']) !!}
+    @include('layout.errores') 
 {{--
      <ul>
             @foreach($errors->all() as $error)

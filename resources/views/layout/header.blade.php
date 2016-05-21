@@ -11,30 +11,44 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				@if (Auth::guest())
-					<a class="navbar-brand" href="{{URL::to('/home')}}">Home</a>
-				@endif					
+				<a class="navbar-brand"href="{{URL::to('/home')}}"> RFuerzo </a>
 				
-				@if (Auth::level() > 0)
-					<a class="navbar-brand" href="{{URL::to('/notas')}}">Notas</a>
-					<a class="navbar-brand" href="{{URL::to('/tema')}}">Temas</a>
-				@endif
-				<a class="navbar-brand" href="{{URL::to('/tarea')}}">Tareas</a>
-				@if (Auth::es_admin()) 
-				<a class="navbar-brand" href="{{URL::to('/centro')}}">Centros</a>	
-				<a class="navbar-brand" href="{{URL::to('/profesor')}}">Profesores</a>					
-				<a class="navbar-brand" href="{{URL::to('/alumno')}}">Alumnos</a>
-				@endif
-				<a class="navbar-brand" href="{{URL::to('/about')}}">About</a>
-				<span class=" navbar-brand float-right" style="margin-left: 20em;">
-					@if (Auth::check())
-					<span class="float-right">{{Auth::user()->name}}</span>
-						<a href="{{URL::to('auth/logout')}}">logout<i class="glyphicon glyphicon-log-out"></i></a>
-					@else
-						<a href="{{URL::to('auth/login')}}">login<i class="glyphicon glyphicon-user"></i></a>
+				<ul class="nav navbar-nav">
+					@if (Auth::guest())
+						<li><a class="navbar-brand" href="{{URL::to('/home')}}">Home</a></li>
+					@endif					
+					
+					@if (Auth::level() > 0)
+						<li><a class="navbar-brand" href="{{URL::to('/notas')}}">Notas</a></li>
+						<li><a class="navbar-brand" href="{{URL::to('/tema')}}">Temas</a></li>
 					@endif
-				</span>				        
-				
-			</div>		
+					<li><a class="navbar-brand" href="{{URL::to('/tarea')}}">Tareas</a></li>
+					@if (Auth::es_admin()) 
+					<li><a class="navbar-brand" href="{{URL::to('/centro')}}">Centros</a></li>	
+					<li><a class="navbar-brand" href="{{URL::to('/profesor')}}">Profesores</a></li>					
+					<li><a class="navbar-brand" href="{{URL::to('/alumno')}}">Alumnos</a></li>
+					@endif
+					<li><a class="navbar-brand" href="{{URL::to('/about')}}">About</a></li>
+				</ul>
+			</div>
+				<ul class="nav navbar-nav navbar-right">
+
+					@if (Auth::check())
+						<li> 
+							<span  class="nombre_login">{{Auth::user()->name}}</span>
+						</li>
+						<li>
+							@if (Auth::es_admin())
+								<a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-danger">Administrador</a>
+							@endif
+							@if (Auth::level() == 1)
+								<a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-info">Profesor</a>
+							@endif
+						</li>
+						<li><a href="{{URL::to('auth/logout')}}" class="link_login">logout<i class=" glyphicon glyphicon-log-out"></i></a></li>
+					@else
+						<li><a href="{{URL::to('auth/login')}}" class="link_login">login<i class="glyphicon glyphicon-user"></i></a></li>
+					@endif
+				</ul>	  
+			
 		</div>
-	</nav>

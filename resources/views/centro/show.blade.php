@@ -5,10 +5,10 @@
 @section('content')
 	<h2>Informacion del Centro:</h2>  
 	<div class="jumbotron text-center">
-		<h2>{{ $datos -> nombre}}</h2>
+		<h2>{{ $datos->nombre}}</h2>
 		<p>
-			<strong>Nombre: </strong>{{$datos -> nombre}}<br>
-			<strong>Dirección: </strong>{{$datos -> direccion}}<br>
+			<strong>Nombre: </strong>{{$datos->nombre}}<br>
+			<strong>Dirección: </strong>{{$datos->direccion}}<br>
 		</p>
 	</div>
 <div class="row">
@@ -21,10 +21,10 @@
             </tr>
         </thead> 
         <tbody>	
-			@foreach($datos -> Profesores  as $profe)
+			@foreach($datos->Profesores  as $profe)
 			<tr>
         		<td>{!! $profe->nombre!!} {!! $profe->apellidos !!}</td>
-        		<td><img src="../images/avatares/{!! $profe -> enlace_avatar !!}" alt="{!! $profe -> nombre !!}" class="img-responsive img-rounded" height="32" width="42"></img></td>
+        		<td><img src="../images/avatares/{!! $profe->enlace_avatar !!}" alt="{!! $profe->nombre !!}" class="img-responsive img-rounded" height="32" width="42"></img></td>
         		<td><a class="btn btn-small btn-success" href="{{ URL::to('profesor/' . $profe->id) }}"> 
                         <i class="glyphicon glyphicon-eye-open"></i> Ver </a>
                 </td>
@@ -48,10 +48,10 @@
             </tr>
         </thead> 
         <tbody>	
-			@foreach($datos -> Alumnos  as $alumno)
+			@foreach($datos->Alumnos  as $alumno)
 			<tr>
         		<td>{!!$alumno->nombre !!} {!! $alumno->apellidos !!}</td>
-        		<td><img src="../images/avatares/{!! $alumno -> enlace_avatar !!}" alt="{!! $alumno -> nombre !!}" class="img-responsive img-rounded" height="42" width="42"></img></td>
+        		<td><img src="../images/avatares/{!! $alumno->enlace_avatar !!}" alt="{!! $alumno->nombre !!}" class="img-responsive img-rounded" height="42" width="42"></img></td>
         		<td>
 					<a class="btn btn-small btn-success" href="{{ URL::to('alumno/' . $alumno->id) }}"> 
                         <i class="glyphicon glyphicon-eye-open"></i> Ver </a>
@@ -59,12 +59,12 @@
         	</tr>
 			@endforeach
 		</tbody>
-		</table>
-		</div>
-		<div class="row col-md-2 pull-right">
+	</table>
+</div>
+<div class="row col-md-2 pull-right">
     <a class="btn btn-small btn-primary" href="{{ URL::to('alumno/create') }}"> 
-<i class="glyphicon glyphicon-plus"></i> Nuevo Alumno </a>
-        </div>
+	<i class="glyphicon glyphicon-plus"></i> Nuevo Alumno </a>
+</div>
 </br> 
 <div class="row col-md-2 pull-right">
 	<a href="{!!  URL::to('centro') !!}"><i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Volver</i></a>

@@ -3,14 +3,17 @@
 	RFuerzo
 @stop
 @section('content')
-<div class="container">
+<div>
+
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h1> <strong class="label label-default">RFuerzo  
-					<img src="../images/icon/logo.png" class="img-responsive" alt="Logo La Lengua de los Mapas" width="64" style="display: inline;"></img></strong><small> la plataforma de apoyo al aprendizaje</small>
-					</h1>
+						<h1> 
+						<img src="../assets/img/index.jpeg" class="img-responsive" alt="" width="64" style="display: inline;"></img>
+							<strong class="label label-default">  RFuerzo  </strong>
+							<small>  la plataforma de apoyo al aprendizaje</small>
+						</h1>
 				</div>
 				<div class="panel-body" >					
 					<div class="row">

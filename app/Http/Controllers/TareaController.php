@@ -32,10 +32,6 @@ class TareaController extends Controller
      */
     public function create()
     {
-        // $_id = Auth::get_owner();
-        // $todos_temas = Tema::where('profesor_id', '=',$_id)->get()->all();        
-        // $temas = $todos_temas::lists('titulo', 'id');
-        // dd($todos_temas, $temas);
         $temas = Tema::lists('titulo', 'id');
         return \View::make('tarea.create', array('temas'=>$temas));
     }
@@ -48,7 +44,6 @@ class TareaController extends Controller
      */
     public function store(Request $request)
     {
-         // ('nombre', 'descripcion', 'file', 'audio', 'tema_id')
 
         $rules = array(
             'nombre'        => 'required|min:6|unique:tarea',          
@@ -72,13 +67,7 @@ class TareaController extends Controller
             // guardar fichero
             $file = \Input::file('file');
             $document = \phpQuery::newDocumentHTML($file);
-            // <button class="NavButton"
-            // $( ":button" )
-            // Sets the HTML content of the element
             $document->find(':button .NavButton')->html('HTML markup');
-            // Sets the element's "class" attribute
-            // $document->find('#container')->attr('class', 'my-container');
-            // onclick="location='../index.html'; return false;"
             $document->find(':button .NavButton')->attr('onclick', "location='..'; return false;");
 
             $archivo = \Input::get('file');
@@ -86,17 +75,9 @@ class TareaController extends Controller
             $destino = '/tareas/';
             $file->move(getcwd().$destino, $nombre);
             
-            // \Storage::put($nombre, $file);
-            // $destino = 'public/tareas/' . $nombre;
-            // \Storage::move($nombre, $destino);
-            // \Storage::copy($nombre, $destino);
-            // file_put_contents("public/tareas/$nombre", $file);
             $tarea = new Tarea;            
-            // $tarea->id                = $new_id;
             $tarea->nombre               = \Input::get('nombre');
             $tarea->descripcion          = \Input::get('descripcion');
-            // $tarea->file                 = \Input::get('file');
-            // $tarea->audio                = \Input::get('audio');
             $tarea->enlace_tarea         = $nombre;
             $tarea->tema_id              = \Input::get('tema_id');
             $tarea->save();
@@ -162,12 +143,13 @@ class TareaController extends Controller
         } else {
             // guardar
             $tarea = Tarea::find($id);
-            $tarea->nombre               = \Input::get('nombre');
-            $tarea->descripcion          = \Input::get('descripcion');
-            // $tarea->file                 = \Input::get('file');
-            // $tarea->audio                = \Input::get('audio');
-            // $tarea->enlace_imagen               = \Input::get('enlace_imagen');
-            // $tarea->tema_id              = \Input::get('tema_id');
+            if (\Input::exists('nombre')){
+                $tarea->nombre               = \Input::get('nombre');
+            }
+            if (\Input::exists('descripcion')){
+                $tarea->descripcion          = \Input::get('descripcion');
+            }
+            
             $tarea->save();
 
             // redirect

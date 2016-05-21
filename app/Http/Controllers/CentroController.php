@@ -116,8 +116,8 @@ class CentroController extends Controller
     public function update(Request $request, $id)
     {
          $rules = array(
-            'nombre' => 'required|min:6|unique:centro',
-            'direccion' => 'required|min:6|unique:centro'
+            'nombre' => 'required|min:6',
+            'direccion' => 'required|min:6'
         );
         $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
@@ -134,8 +134,12 @@ class CentroController extends Controller
         } else {
             // guardar
             $centro = Centro::find($id);
-            $centro->nombre       = \Input::get('nombre');
-            $centro->direccion    = \Input::get('direccion');
+            if (\Input::exists('nombre')){
+                $centro->nombre       = \Input::get('nombre');
+            }
+            if (\Input::exists('direccion')){
+                $centro->direccion    = \Input::get('direccion');
+            }
             $centro->save();
 
             // redirect

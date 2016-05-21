@@ -12,7 +12,7 @@
             @endforeach
         </ul>
     {!! Form::open(array('url' => 'mapa', 'method' => 'post', 'files'=> true)) !!}
-    <div class="for-horizontal">
+    <div class="form-horizontal">
             <div class="form-group">
             {!! Form::label('titulo', 'Titulo', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9 col-sm-offset-1">

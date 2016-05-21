@@ -162,12 +162,21 @@ class TemaController extends Controller
         } else {
             // guardar
             $tema = Tema::find($id);
-            $tema->titulo               = \Input::get('titulo');
-            $tema->descripcion          = \Input::get('descripcion');
-            // $tema->imagen               = \Input::get('imagen');
-            // $tema->audio                = \Input::get('audio');
-            // $tema->enlace               = \Input::get('enlace');
-            // $tema->profesor_id          = \Input::get('profesor_id');
+            if (\Input::exists('titulo')){
+                $tema->titulo               = \Input::get('titulo');
+            }
+            if (\Input::exists('descripcion')){
+                $tema->descripcion          = \Input::get('descripcion');
+            }
+            if (\Input::exists('enlace')){
+                $archivo = \Input::file('enlace');
+                $nombre = uniqid();
+                $nombre =  \Input::file('enlace')->getClientOriginalName();
+                $destino = '/images/temas/';
+                \Storage::put($nombre, $archivo);
+                file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
+                $tema->enlace               = \Input::get('enlace');
+            }
             $tema->save();
 
             // redirect

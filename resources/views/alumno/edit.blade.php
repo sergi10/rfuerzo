@@ -4,7 +4,7 @@
 @stop
 @section('content')
 	<h2>Editar Alumno {{ $datos -> nombre}}:</h2>  
-    {!! Html::ul($errors -> all(),['class' => 'caja_errores col-md-4']) !!}
+    @include('layout.errores') 
    {{-- <ul>
             @foreach($errors->all() as $error)
                 <li class="caja_errores col-md-4">{!!  $error  !!}</li>
@@ -49,7 +49,7 @@
             <div class="form-group">
             {!! Form::label('nacimiento', 'Nacimiento', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9 col-sm-offset-1">
-                     {!! Form::date('f-nac', '', array('id'=>'calendario'),$attributes = $errors->has('f-nac') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
+                     {!! Form::date('nacimiento', '', array('id'=>'calendario'),$attributes = $errors->has('f-nac') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
             </div>
             <div class="form-group">           
@@ -66,24 +66,11 @@
                     </div>
                 </div>
             </div>
-
-            <div class="form-group col-md-6 pull-right">  
-                <div class="form-group col-md-3">
-                    {!! Form::submit('Guardar', ['class' => 'btn btn-small btn-primary']) !!}
-                </div>
-                <div class="form-group col-md-3">
-                    <a href="{!!  URL::previous() !!}"><i class=" btn btn-small btn-default glyphicon glyphicon-backward"> Cancelar</i></a>
-                </div>
-            </div>
+            @include('layout.enviar') 
         </div>
             
         {!!  Form::close()  !!} 
-      <script type="text/javascript">
-    $(function(){
 
-        $('#calendario').datepicker({
-            dateFormat: "dd-mm-yy"
-        });
-    });
-</script>   
+    @include('layout.zcalendar') 
+
 @stop
