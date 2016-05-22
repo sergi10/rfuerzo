@@ -48,7 +48,7 @@ class TareaController extends Controller
         $rules = array(
             'nombre'        => 'required|min:6|unique:tarea',          
             'descripcion'   => 'required|min:6', 
-            'file'          => 'required', 
+            'file'          => 'required|mime:html', 
             'tema_id'       => 'required'
         );
         $messages = array(
@@ -56,6 +56,7 @@ class TareaController extends Controller
             'nombre.unique' => 'La tarea :attribute ya esta registrado.',
             'nombre.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
             'descripcion.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'file.mime' => 'El archivo del campo :attribute debe ser un archivo :mime válido',
         );
         $validator = \Validator::make(\Input::all(), $rules, $messages);
         

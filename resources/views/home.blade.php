@@ -3,14 +3,12 @@
 	RFuerzo
 @stop
 @section('content')
-<div>
-
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 						<h1> 
-						<img src="../assets/img/index.jpeg" class="img-responsive" alt="" width="64" style="display: inline;"></img>
+						<img src="../assets/img/index.jpeg" class="img-responsive" alt="" width="64" style="display: inline;">
 							<strong class="label label-default">  RFuerzo  </strong>
 							<small>  la plataforma de apoyo al aprendizaje</small>
 						</h1>
@@ -36,5 +34,4 @@ alumnado y al profesorado a aprender y evolucionar juntos.</p>
 			</div>
 		</div>
 	</div>
-</div>
 @stop

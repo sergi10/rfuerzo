@@ -59,13 +59,15 @@ class TemaController extends Controller
        $rules = array(
             'titulo'    => 'required|min:6|unique:tema',           
             'descripcion' => 'required',    
-            'enlace'      => 'required',
+            'enlace'      => 'required|image|max:200',
             'profesor_id' => 'required'
         );
              $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
-            'tema.unique' => 'El tema :attribute ya esta registrado.',
-            'tema.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'titulo.unique' => 'El tema :attribute ya esta registrado.',
+            'titulo.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'enlace.image' => 'El campo :attribute debe ser un formato de imagen váliddo (jpg, jpeg, png, bmp, gif o svg).',
+            'enlace.max' => 'El tamaño de la imagen excede de :max kb',
         );
         $validator = \Validator::make(\Input::all(), $rules, $messages);
        
@@ -86,13 +88,28 @@ class TemaController extends Controller
             // obtener imagen
             $archivo = \Input::file('enlace');
             $nombre = uniqid();
-            // $nombre = $nombre .'.png';
-            // $nombre = $nombre .'.png';
-            $nombre =  \Input::file('enlace')->getClientOriginalName();
-            $destino = '/images/temas/';
-            \Storage::put($nombre, $archivo);
-            file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
+
+            $nombre_file = $archivo->getClientOriginalName();
+            $nombre_file2 = $nombre .'.'.$archivo->getClientOriginalExtension();
+            // dd($archivo,$nombre_file,$nombre_file2);
+            // $ruta = public_path('/images/temas/'. $nombre_file);
+            $request->file('enlace')->move(
+                base_path().'/public/images/temas/', $nombre_file);
+
+
+
+            // // $nombre = $nombre .'.png';
+            // // $nombre = $nombre .'.png';
+            // $nombre =  \Input::file('enlace')->getClientOriginalName();
+            // $destino = '/images/temas/';
+            // \Storage::put($nombre, $archivo);
+            // file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
           
+
+
+
+
+
             // guardar
             $tema = new Tema;            
             // $tema->id                = $new_id;
@@ -100,7 +117,7 @@ class TemaController extends Controller
             $tema->descripcion          = \Input::get('descripcion');
             // $tema->imagen               = $nombre;
             // $tema->audio                = \Input::get('audio');
-            $tema->enlace               = $nombre;
+            $tema->enlace               = $nombre_file;
             $tema->profesor_id          = \Input::get('profesor_id');
             $tema->save();
 
@@ -148,10 +165,12 @@ class TemaController extends Controller
             'titulo'    => 'required|min:6',           
             'descripcion' => 'required',    
         );
-             $messages = array(
+        $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
             'tema.unique' => 'El tema :attribute ya esta registrado.',
             'tema.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
+            'enlace.image' => 'El campo :attribute debe ser un formato de imagen váliddo (jpg, jpeg, png, bmp, gif o svg).',
+            'enlace.max' => 'El tamaño de la imagen excede de :max kb',
         );
         $validator = \Validator::make(\Input::all(), $rules, $messages);
        
@@ -175,7 +194,7 @@ class TemaController extends Controller
                 $destino = '/images/temas/';
                 \Storage::put($nombre, $archivo);
                 file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
-                $tema->enlace               = \Input::get('enlace');
+                $tema->enlace = \Input::get('enlace');
             }
             $tema->save();
 

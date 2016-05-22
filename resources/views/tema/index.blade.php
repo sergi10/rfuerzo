@@ -23,8 +23,9 @@
                 {{-- <td>{!! $value->id !!}</td> --}}
                 <td>{!! $value->titulo !!}</td>
                 <td>{!! $value->descripcion !!}</td>
-                <td><img src="../images/temas/{!! $value -> enlace !!}" alt="{!! $value -> titulo !!}" class="img-responsive img-rounded"  width="100"></img>
-</div></td>
+                <td>
+                    <img src="../images/temas/{!! $value->enlace !!}" alt="{!! $value->titulo !!}" class="img-responsive img-rounded"  width="100"></img>
+                </td>
                 {{-- <td>{!! $value->audio !!}</td> --}}
                 <td>{!! $value->my_profesor() !!}</td>
                 <td>
