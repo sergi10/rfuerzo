@@ -19,10 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de datos: `rfuerzo`
+-- Base de datos: ` u334658180_rfu`
 --
-CREATE DATABASE IF NOT EXISTS `rfuerzo` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `rfuerzo`;
+CREATE DATABASE IF NOT EXISTS ` u334658180_rfu` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE ` u334658180_rfu`;
 
 -- --------------------------------------------------------
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `alumno` (
   `apellidos` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `mail` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `user` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
-  `pass` varchar(11) COLLATE utf8_spanish2_ci NOT NULL,
+  `pass` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
   `nacimiento` datetime DEFAULT NULL,
   `centro_id` int(11) NOT NULL,
   `enlace_avatar` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -55,7 +55,7 @@ DROP TABLE IF EXISTS `centro`;
 CREATE TABLE IF NOT EXISTS `centro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `direccion` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `direccion` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=2 ;
 
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `profesor` (
   `apellidos` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `mail` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `user` varchar(45) COLLATE utf8_spanish2_ci NOT NULL,
-  `pass` varchar(11) COLLATE utf8_spanish2_ci NOT NULL,
+  `pass` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
   `nacimiento` datetime DEFAULT NULL,
   `centro_id` int(11) NOT NULL,
   `enlace_avatar` varchar(255) COLLATE utf8_spanish2_ci DEFAULT NULL,
