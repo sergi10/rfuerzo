@@ -8,7 +8,7 @@
             <dd > la plataforma de apoyo al aprendizaje</dd>
             <dt >Licencia:</dt>
             <dd >			
-                <img src="../assets/img/cc_nc_by_d.png" alt="Creative Commons Lincense cc_nc_by_sa" class="img-responsive " style="display: inline"  width="200"></img>
+            <img src="../assets/img/cc_nc_by_d.png" alt="Creative Commons Lincense cc_nc_by_sa" class="img-responsive " style="display: inline"  width="200">
             </dd>
         </dl>
     </div>

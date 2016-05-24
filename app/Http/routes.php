@@ -27,27 +27,15 @@ Route::get('index.php', function(){
 	return View('home');
 });
 
-// Route::get('/tema/{profe_id}', [
-//     'as'   => 'tema.create.profe',
-//     'uses' => 'TemaController@create_profe'
-// ]);
-
-// Route::get('/login', function(){
-// 	return View('login');
-// });
-
 // Rutas para el login
 Route::get('/', 'HomeController@home');
 Route::get('/home', 'HomeController@home');
 
-// Route::resource('login', 'HomeController',['only'=>['index','show']]);
 
 // Gestion del acceso con el authcontroller de Laravel
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
-// Route::post('auth/login', ['as'=>'login','uses'=>'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
-// Route::post('auth/logout', ['as'=>'logout','uses'=>'Auth\AuthController@getLogout');
 
 // Rutas para el centro
 Route::resource('centro', 'CentroController');
