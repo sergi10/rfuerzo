@@ -69,11 +69,25 @@ class AuthController extends Controller
             'level' => $data['level']
         ]);
     }
-
+    
+    /**
+     * Gets the login.
+     *
+     * @param      Request  $request  (description)
+     *
+     * @return     <View>   The login.
+     */
     public function getLogin(Request $request){
         return view("auth/login");
     }
 
+    /**
+     * Posts a login.
+     *
+     * @param      Request  $request  (description)
+     *
+     * @return     <View>   ( description_of_the_return_value )
+     */
     public function postLogin(Request $request){    
 
         $rules = array(
@@ -115,6 +129,14 @@ class AuthController extends Controller
         }
 
     }
+
+    /**
+     * Gets the logout.
+     *
+     * @param      Request  $request  (description)
+     *
+     * @return     <Vies>   The logout.
+     */
     public function getLogout(Request $request){        
         Session::flush();
         return  \Redirect::to('home');

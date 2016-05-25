@@ -9,24 +9,21 @@ responsiveVoice.setDefaultVoice("Spanish Female");
 	<h2>Informacion del Tema:</h2>  
 	<div class="jumbotron text-justify">
 		<h2><strong>{{ $datos -> titulo}} </strong></h2>
-		{{-- protected $fillable = array('titulo', 'descripcion', 'enlace','enlace_imagen', 'profesor_id'); --}}
 		<p>
 		{{$datos->descripcion}}<br>
 		</p>
 		<button class="butt js--triggerAnimation" onclick="responsiveVoice.speak('{!! $datos -> titulo !!}, {!! $datos -> descripcion !!}');" type="button" value="Play"><i class="glyphicon glyphicon-volume-up "></i>Play</button>
 	</div>
 	<div class="row">
-			<h2><strong>Tema:</h2> 
-<img src="../images/temas/{!! $datos -> enlace !!}" alt="{!! $datos -> titulo !!}" class="img-responsive img-rounded"  width="200"></img>
+		<h2><strong>Tema:</strong></h2> 
+<img src="../images/temas/{!! $datos -> enlace !!}" alt="{!! $datos -> titulo !!}" class="img-responsive img-rounded"  width="200">
 </div>
-	{{-- <div class="row">
-			<a href="http://translate.google.com/translate_tts?tl=es&q=prueba de lectura de texto&client"><i class="glyphicon glyphicon-volume-up ">audio:</i></a><br>
-		</div> --}}
 
 <div class="row">
 <h2><strong>Tareas: </strong></h2>
  <table id="tareas_tema" class="table table-striped table-bordered" cellspacing="6" width="75%">
 			<thead>
+			<tr>
                 <th>Nombre</th>
                 <th style="width: 30%">Descripcion</th>
                 <th>Audio</th>
@@ -40,7 +37,6 @@ responsiveVoice.setDefaultVoice("Spanish Female");
 			<td>{{ $tarea -> descripcion}}</td>
 			<td><button class="butt js--triggerAnimation" onclick="responsiveVoice.speak('{!! $tarea -> nombre !!}, {!! $tarea -> descripcion !!}');" type="button" value="Play"><i class="glyphicon glyphicon-volume-up "></i></button></td>
 			<td>
-				{{-- <a  href="{{ URL::to('../tareas/'. $tarea -> enlace_imagen)}}" class="default_popup"><i class=" btn btn-default glyphicon glyphicon-list-alt "></i></a> --}}
 				
 				<a  href="{{ URL::to('../tarea/'. $tarea -> id)}}" class="default_popup"><i class=" btn btn-default glyphicon glyphicon-list-alt "></i></a>
 			</td>
@@ -51,12 +47,6 @@ responsiveVoice.setDefaultVoice("Spanish Female");
 </div>
 
 
-{{-- <div class="row">
-<a  href="{{ URL::to('../tareas/lengua_historia_separación_sílabas_paleolítico.htm?pw=600&amp;ph=450') }}" class="default_popup"><i class=" btn btn-default glyphicon glyphicon-list-alt "> Tarea HTML</i></a>
-</div>
-<div class="row">
-<a  href="{{ URL::to('../tareas/lengua_historia_separación_sílabas_paleolítico.jqz?pw=600&amp;ph=450') }}" class="default_popup"><i class=" btn btn-default glyphicon glyphicon-th-list"> Tarea JQZ</i></a>
-</div> --}}
 <div class="row col-md-2 pull-right">
 	<a class="btn btn-small btn-primary" href="{{ URL::to('tarea/create') }}"> 
 	<i class="glyphicon glyphicon-plus"></i> Nueva Tarea </a>

@@ -54,7 +54,6 @@ class ProfesorController extends Controller
             'user'      => 'required|min:6|unique:profesor',
             'pass'      => 'required|min:6',
             'centro_id' => 'required'
-            // 'nacimiento'=> 'required'
         );
          $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
@@ -75,22 +74,13 @@ class ProfesorController extends Controller
         } else {
             // obtener imagen 
             $identicon = new \Identicon\Identicon();
-        $imageData = $identicon->getImageData(\Input::get('user'). \Input::get('mail'), 128);
-        $avatar_name = uniqid();
-        $avatar_name = $avatar_name .'.png';
-        $destino = '/images/avatares/';
-        \Storage::put($avatar_name, $imageData);
-        file_put_contents(getcwd().$destino.$avatar_name, \Storage::get($avatar_name));
-
-            // guardar
-            // $theId = \DB::getPdo()->lastInsertId(); 
-            // // dd($theId) ;
-            // $new_id = 0;
-            // if ($theId > 0){
-            //     $new_id = $theId +1;    
-            // }
+            $imageData = $identicon->getImageData(\Input::get('user'). \Input::get('mail'), 128);
+            $avatar_name = uniqid();
+            $avatar_name = $avatar_name .'.png';
+            $destino = '/images/avatares/';
+            \Storage::put($avatar_name, $imageData);
+            file_put_contents(getcwd().$destino.$avatar_name, \Storage::get($avatar_name));
             
-            // $profesor->id           = $new_id;
             $profesor = new Profesor;
             $user = new User;
 
@@ -103,20 +93,18 @@ class ProfesorController extends Controller
             $profesor->user         = \Input::get('user');
             $user->name             = \Input::get('user');
             $user->password         = bcrypt( \Input::get('pass'));
-            $admin = (\Input::has('es_admin')) ? true : false;// ? true : false;
-            // $admin = $user->level;
+            $admin = (\Input::has('es_admin')) ? true : false;
+
             if ($admin){
                 $user->level            =  2;
             }
             else{
                 $user->level            =  1;
             }
-            // dd($user,$profesor,$admin);
+           
             $user->save();
             $profesor->save();
 
-            // $movie = new Movie;
-            // $movie->create($request->all());
             // redirect
             \Session::flash('message', 'El Profesor ' . $profesor->nombre . ' ha sido creado!');
             return \Redirect::to('profesor');
@@ -134,11 +122,6 @@ class ProfesorController extends Controller
         $profesor = Profesor::find($id);
         $centro = Centro::find($profesor->centro_id);
         $temas = $profesor->temas();
-        // $mepas = Profesor::with('mapas', 'mapas.titulo')->find(1);
-        // $mapas = Mapa::with('mapas')->find($profesor->id);
-        // $mapas = \DB::table('mapa')->where('profesor_id', $profesor->id);
-        // $mapas = Profesor::find($profesor->id)->mapas;
-        // dd($mapas);  
         return \View::make('profesor.show', array('datos'=>$profesor, 'centro'=>$centro, 'temas'=>$temas));
     }
 
@@ -164,12 +147,6 @@ class ProfesorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // if ($request){
-        //     dd('CON Datos', $request);
-        // }else{
-        //     dd('Error sin datos', $request);
-
-        // }
         $rules = array(
             'nombre'    => 'required',           
             'apellidos' => 'required',    
@@ -177,7 +154,6 @@ class ProfesorController extends Controller
             'user'      => 'min:6',
             'pass'      => 'min:6',
             'centro_id' => 'required'
-            // 'nacimiento'=> 'required'
         );
        $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
@@ -188,8 +164,7 @@ class ProfesorController extends Controller
             'pass.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
         );
         $validator = \Validator::make(\Input::all(), $rules, $messages);
-
-        // proceso de login
+       
         if ($validator->fails()) {
             return \Redirect::to('profesor/' . $id . '/edit')
                 ->withErrors($validator);

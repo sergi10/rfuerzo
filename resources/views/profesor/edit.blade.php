@@ -5,13 +5,6 @@
 @section('content')
 	<h2>Editar Profesor {{ $datos -> nombre}}:</h2>  
     @include('layout.errores') 
-
-{{--     <ul>
-            @foreach($errors->all() as $error)
-                <li>{!!  $error  !!}</li>
-            @endforeach
-        </ul>
- --}}
     {!! Form::model($datos, array('route' => array('profesor.update', $datos->id), 'method' => 'PUT')) !!}
         <div class="form-horizontal">
            <div class="form-group">

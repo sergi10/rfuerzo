@@ -9,9 +9,6 @@ responsiveVoice.setDefaultVoice("Spanish Female");
 	<h2>Informacion de la Tarea:</h2>  
 	<div class="jumbotron text-center">
 		<h2>{{ $datos -> nombre}}</h2>
-
-		 {{-- ('nombre', 'descripcion', 'file', 'audio', 'tema_id') --}}
-
 		<p>
 			{{$datos -> descripcion}}<br>
 		</p>

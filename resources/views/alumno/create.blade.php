@@ -3,17 +3,9 @@
 	Crear Alumno
 @stop
 @section('content')
-	<h2>Crear Alumno:</h2>  
-    {{-- 'id','nombre','apellidos','mail','user','pass','avatar', 'f-nac', 'centro_id' --}}
+	<h2>Crear Alumno:</h2> 
     @include('layout.errores') 
-{{--     
-    <ul>
-            @foreach($errors->all() as $error)
-                <li class="caja_errores col-md-9">{!!  $error  !!}</li>
-            @endforeach
-     </ul> 
---}}
-<br></br>
+<br>
 <div></div>
     {!! Form::open(array('url' => 'alumno', 'method' => 'post', 'files'=> true)) !!}
     <div class="form-horizontal">
@@ -32,7 +24,6 @@
          <div class="form-group">
             {!! Form::label('mail', 'E-mail', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9 col-sm-offset-1 ">
-                {{-- <div class="col-sm-9 col-sm-offset-1  @if($errors--> has('mail') erroneo @endif"> --}}
                     {!! Form::email('mail', Input::old('mail'), $attributes = $errors->has('mail') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
             </div>
@@ -53,14 +44,7 @@
                 <div class="col-sm-9 col-sm-offset-1">
                     {!! Form::date('nacimiento', \Carbon\Carbon::now(),array('id'=>'calendario'), $attributes = $errors->has('nacimiento') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
-            </div>
-           {{--  <div class="form-group">
-            {!! Form::label('nacimiento_JQ', 'Nacimiento', ['class' => 'col-sm-2 control-label']) !!}
-                <div class="col-sm-9 col-sm-offset-1">
-                    {!! Form::date('f-nac', '', array('id'=>'calendario'),$attributes = $errors->has('f-nac') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
-                </div>
-            </div> --}}
-           
+            </div>           
             <div class="form-group">
                  <div class="form-group  col-md-6">
                 {!! Form::label('centro_id', 'Centro', ['class' => 'col-sm-2 control-label']) !!}
@@ -78,10 +62,8 @@
     
 
             @include('layout.enviar') 
-        </div>
+    </div>
     {!!  Form::close()  !!} 
-{{-- <script src="//code.jquery.com/jquery-1.10.2.js"></script> --}}
-{{-- <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script> --}}
             @include('layout.zcalendar') 
 
 

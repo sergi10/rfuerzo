@@ -13,30 +13,39 @@ use App\Alumno as Alumno;
 
 class HomeController extends Controller
 {
-	public function home(){
+	/**
+     * { function_description }
+     *
+     * @return     <View>  ( description_of_the_return_value )
+     */
+    public function home(){
 		
 		return view('home');
 	}
-
-    public function index(){
-    //	return 'Llamada al HomeController';
-    	// return \View::make('alumno');
-
-    	// $alumnos = Alumno::all();
-        // return \View::make('alumno.index', array('datos'=>$alumnos));
-
+    /**
+     * { function_description }
+     *
+     * @return     <View>  ( description_of_the_return_value )
+     */
+    public function index(){    
         return Redirect::to('login');
     }
 
+    /**
+     * { function_description }
+     *
+     * @return     <View>  ( description_of_the_return_value )
+     */
     public function login(){
-
-    	// return view('login');
-    	return Redirect::to('login');
+    	return Redirect::to('auth/login');
     }
 
+    /**
+     * { function_description }
+     *
+     * @return     <View>  ( description_of_the_return_value )
+     */
     public function logear(){
-
-    	// $datos_login = array('usuario'=>'yoyo', 'pass'=>'yoyo');
     	$datos_login = array(
 				'user'=>$Request::input('usuario'),
 				'pass'=>$Request::input('pass'),
@@ -51,9 +60,12 @@ class HomeController extends Controller
     		return Redirect::to('login')->withInput;
     	}
     }
-
+    /**
+     * { function_description }
+     *
+     * @return     <View>  ( description_of_the_return_value )
+     */
     public function logout(){
-
     	Auth::logout();
     	return  Redirect::to('home');
     }

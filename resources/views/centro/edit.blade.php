@@ -6,7 +6,7 @@
 	<h2>Editar Centro {{ $datos -> nombre}}:</h2> 
     @include('layout.errores')
 
-    <br></br>
+    <br>
     <div></div>
     {!! Form::model($datos, array('route' => array('centro.update', $datos->id), 'method' => 'PUT')) !!}
     <div class="form-horizontal">

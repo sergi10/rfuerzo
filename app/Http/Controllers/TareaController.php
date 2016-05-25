@@ -126,8 +126,7 @@ class TareaController extends Controller
     {
           $rules = array(
             'nombre'        => 'required|min:6',          
-            'descripcion'   => 'required|min:6', 
-            // 'tema_id'       => 'required'
+            'descripcion'   => 'required|min:6'
         );
         $messages = array(
             'required' => 'El campo :attribute es obligatorio.',

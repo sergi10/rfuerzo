@@ -11,13 +11,7 @@
 |
 */
 
-// Route::get('home', function(){
-// 	return View('home');
-// });
 
-Route::get('about', function(){
-	return View('about');
-});
 
 Route::get('index.html', function(){
 	return View('home');
@@ -25,6 +19,10 @@ Route::get('index.html', function(){
 
 Route::get('index.php', function(){
 	return View('home');
+});
+
+Route::get('about', function(){
+	return View('about');
 });
 
 // Rutas para el login

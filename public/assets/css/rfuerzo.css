@@ -1,13 +1,14 @@
 
 html {
-    overflow-y: scroll;
+    width: 100%;
     height: 100%;
+    overflow: scroll;
 }
 
 body {
-    min-width: 100%;
-    min-height: 100%;
-    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
 }
 .jumbotron img{
     margin: 0 auto;    

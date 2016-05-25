@@ -44,7 +44,6 @@ class TemaController extends Controller
         }else{
            $profesores = Profesor::find($profe_id);
         }
-        // $profesores = Profesor::lists('nombre', 'id');
         dd('function create_profe', $profe_id, $profesores);
     }
 
@@ -71,15 +70,7 @@ class TemaController extends Controller
         );
         $validator = \Validator::make(\Input::all(), $rules, $messages);
        
-          // dd($archivo, $nombre, $destino);         
-        // \Storage::put($archivo, \Input::get('imagen'));
-        // file_put_contents(getcwd().$destino.$archivo, \Storage::get($archivo));
-        
-
-        // \Storage::put($nombre, $archivo);
-        // file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
-        // $file->move(getcwd().$destino, $nombre);
-        
+                 
         // proceso de login
         if ($validator->fails()) {
             return \Redirect::to('tema/create')
@@ -91,32 +82,14 @@ class TemaController extends Controller
 
             $nombre_file = $archivo->getClientOriginalName();
             $nombre_file2 = $nombre .'.'.$archivo->getClientOriginalExtension();
-            // dd($archivo,$nombre_file,$nombre_file2);
-            // $ruta = public_path('/images/temas/'. $nombre_file);
+            
             $request->file('enlace')->move(
                 base_path().'/public/images/temas/', $nombre_file);
 
-
-
-            // // $nombre = $nombre .'.png';
-            // // $nombre = $nombre .'.png';
-            // $nombre =  \Input::file('enlace')->getClientOriginalName();
-            // $destino = '/images/temas/';
-            // \Storage::put($nombre, $archivo);
-            // file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
-          
-
-
-
-
-
             // guardar
             $tema = new Tema;            
-            // $tema->id                = $new_id;
             $tema->titulo               = \Input::get('titulo');
             $tema->descripcion          = \Input::get('descripcion');
-            // $tema->imagen               = $nombre;
-            // $tema->audio                = \Input::get('audio');
             $tema->enlace               = $nombre_file;
             $tema->profesor_id          = \Input::get('profesor_id');
             $tema->save();

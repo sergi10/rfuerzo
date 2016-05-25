@@ -4,18 +4,10 @@
 @stop
 @section('content')
 	<h2>Crear Profesor:</h2>  
-    {{-- 'id','nombre','apellidos','mail','user','pass','avatar', 'f-nac', 'centro_id' --}}
     
     @include('layout.errores') 
-{{--
-     <ul>
-            @foreach($errors->all() as $error)
-                <li>{!!  $error  !!}</li>
-            @endforeach
-        </ul>
- --}}
- <br></br>
-<div></div>
+
+ <br>
     {!! Form::open(array('url' => 'profesor')) !!}
     <div class="form-horizontal">
             <div class="form-group">

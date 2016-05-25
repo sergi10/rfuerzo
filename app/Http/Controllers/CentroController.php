@@ -60,21 +60,10 @@ class CentroController extends Controller
                 ->withErrors($validator);
         } else {
             // guardar
-            // $centro = new Centro;
             
-            // $centro->save();
-
-            $centro = new Centro;
-            // $ultimo = Centro::last();
-            // $theId = \DB::getPdo()->lastInsertId(); 
-            // dd($theId) ;
-            // $new_id = $theId +1;
-            // dd($new_id);
-            // $centro->id            = $new_id;
+            $centro = new Centro;            
             $centro->nombre       = \Input::get('nombre');
             $centro->direccion    = \Input::get('direccion');
-            // $centro->create($request->all());
-            // dd($centro);
             $centro->save();
             // redirect
             \Session::flash('message', 'El Centro ' . $centro->nombre . ' ha sido creado!');
@@ -127,7 +116,6 @@ class CentroController extends Controller
             'direccion.min' => 'El campo :attribute debe de tener como minimo :min digitos.',
         );
         $validator = \Validator::make(\Input::all(), $rules, $messages);
-// proceso de login
         if ($validator->fails()) {
             return \Redirect::to('centro/' . $id . '/edit')
                 ->withErrors($validator);

@@ -20,16 +20,8 @@
                 <div class="col-sm-9 col-sm-offset-1">
                     {!! Form::textarea('descripcion', Input::old('descripcion'), $attributes = $errors->has('descripcion') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
-            </div>
-             
-            {{-- <div class="form-group">
-            {!! Form::label('file', 'Archivo', ['class' => 'col-sm-2 control-label']) !!}
-                <div class="col-sm-9 col-sm-offset-1">
-                    {!! Form::file('file', Input::old('file'), $attributes = $errors->has('file') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
-                </div>
-            </div> --}}
-            <br>
-            
+            </div>             
+            <br>            
        @include('layout.enviar') 
     </div>
     {!!  Form::close()  !!} 

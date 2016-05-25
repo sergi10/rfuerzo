@@ -14,7 +14,7 @@ use DB;
 use Hash;
 class AlumnoController extends Controller
 {
-        /**
+     /**
      * Display a listing of the resource.
      *
      * @return Response

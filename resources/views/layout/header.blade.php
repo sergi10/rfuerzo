@@ -23,28 +23,31 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::check())
-                <li> 
-                    <span  class="nombre_login">{{Auth::user()->name}}</span>
-                </li>
-                <li>
-                    @if (Auth::es_admin())
-                    <a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-danger" id="adm_label" style="color: #EEE;">Administrador</a>
-                    @endif
-                    @if (Auth::level() == 1)
-                    <a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-info">Profesor</a>
-                    @endif
-                </li>
-                <li>
-                    <a href="{{URL::to('auth/logout')}}" class="link_login">logout
-                        <i class=" glyphicon glyphicon-log-out"></i>
-                    </a>
-                </li>
+                    <li> 
+                        <span  class="nombre_login">{{Auth::user()->name}}</span>
+                    </li>
+                    <li>
+                        @if (Auth::es_admin())
+                            <a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-danger" id="adm_label" style="color: #EEE;">Administrador</a>
+                        @endif
+                        @if (Auth::level() == 1)
+                            <a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-info">Profesor</a>
+                        @endif
+                        @if (Auth::level() == 0)
+                            <a href="#" class="label label-success">Alumno</a>
+                        @endif
+                    </li>
+                    <li>
+                        <a href="{{URL::to('auth/logout')}}" class="link_login">logout
+                            <i class=" glyphicon glyphicon-log-out"></i>
+                        </a>
+                    </li>
                 @else
-                <li>
-                    <a href="{{URL::to('auth/login')}}" class="link_login">login
-                        <i class="glyphicon glyphicon-user"></i>
-                    </a>
-                </li>
+                    <li>
+                        <a href="{{URL::to('auth/login')}}" class="link_login">login
+                            <i class="glyphicon glyphicon-user"></i>
+                        </a>
+                    </li>
                 @endif
             </ul>	 
         </div><!-- navbar-header-->

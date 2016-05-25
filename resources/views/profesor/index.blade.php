@@ -6,16 +6,14 @@
 	<h2>Listado de Profesores:</h2> 
     <table id="profesores" class="table table-striped table-bordered" cellspacing="10" width="95%">
         <thead>
-            {{-- 'id','nombre','apellidos','mail','user','pass','avatar', 'f-nac', 'centro_id' --}}
+          
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>apellidos</th>
                 <th>E-mail</th>
                 <th>User</th>
-                {{-- <th>Password</th> --}}
                 <th>Avatar</th>
-                {{-- <th>Nacimiento</th> --}}
                 <th>Centro</th>
             </tr>
         </thead> 
@@ -27,9 +25,7 @@
                 <td>{!! $value->apellidos !!}</td>
                 <td>{!! $value->mail !!}</td>
                 <td>{!! $value->user !!}</td>
-                {{-- <td>{!! $value->pass !!}</td> --}}
-                <td><img src="../images/avatares/{!! $value -> enlace_avatar !!}" alt="{!! $value -> nombre !!}" class="img-responsive img-rounded" height="42" width="42"></img></td>
-                {{-- <td>{!! $value->nacimiento !!}</td> --}}
+                <td><img src="../images/avatares/{!! $value -> enlace_avatar !!}" alt="{!! $value -> nombre !!}" class="img-responsive img-rounded" height="42" width="42"></td>
                 <td>{!! $value->my_centro() !!}</td>
                 <td>
                     <a class="btn btn-small btn-success" href="{{ URL::to('profesor/' . $value->id) }}"> 

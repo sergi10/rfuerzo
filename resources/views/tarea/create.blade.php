@@ -3,18 +3,9 @@
 	Crear Tarea
 @stop
 @section('content')
-	<h2>Crear Tarea:</h2>  
-    
-    {{-- 'nombre', 'descripcion', 'file', 'audio', 'enlace_imagen_imagen', 'enlace_imagen_audio', 'tema_id' --}}
+	<h2>Crear Tarea:</h2>     
 
     @include('layout.errores') 
-{{--     
-    <ul>
-            @foreach($errors->all() as $error)
-                <li class="caja_errores col-md-9">{!!  $error  !!}</li>
-            @endforeach
-     </ul> 
---}}
     {!! Form::open(array('url' => 'tarea', 'method' => 'post', 'files'=> true)) !!}
     <div class="form-horizontal">
             <div class="form-group">
