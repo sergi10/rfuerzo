@@ -54,14 +54,14 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'      => env('DB_HOST', 'mysql.hostinger.es'),
+            'host'      => env('DB_HOST', '<AQUI TU SERVIDOR>'),
             // DB MIGRACIONES
             // 'database'  => env('DB_DATABASE', ''),
             
             // DB SQL
-            'database'  => env('DB_DATABASE', 'u334658180_rfu'),
-            'username'  => env('DB_USERNAME', 'u334658180_rfu'),
-            'password'  => env('DB_PASSWORD', '8Um7QkUdcFH3'),
+            'database'  => env('DB_DATABASE', '<AQUI EL NOMBRE DE LA BASE DE DATOS>'),
+            'username'  => env('DB_USERNAME', '<AQUI EL NOMBRE DE USUARIO CON PRIVILEGIOS>'),
+            'password'  => env('DB_PASSWORD', '<AQUI EL PASSWORD DEL USUARIO>'),
             'charset'   => 'utf8',
             'collation' => 'utf8_spanish2_ci',
             'prefix'    => '',
