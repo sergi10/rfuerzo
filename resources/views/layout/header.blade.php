@@ -21,20 +21,20 @@
                 @endif
                 <li><a class="navbar-brand" href="{{URL::to('/about')}}">About</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" id="rf-login">
                 @if (Auth::check())
                     <li> 
                         <span  class="nombre_login">{{Auth::user()->name}}</span>
                     </li>
                     <li>
                         @if (Auth::es_admin())
-                            <a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-danger" id="adm_label" style="color: #EEE;">Administrador</a>
+                            <a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-danger rf-log_label" style="color: #EEE;">Administrador</a>
                         @endif
                         @if (Auth::level() == 1)
-                            <a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-info">Profesor</a>
+                            <a href="{{URL::to('profesor/'.Auth::get_owner())}}" class="label label-info rf-log_label">Profesor</a>
                         @endif
                         @if (Auth::level() == 0)
-                            <a href="#" class="label label-success">Alumno</a>
+                            <a href="#" class="label label-success rf-log_label">Alumno</a>
                         @endif
                     </li>
                     <li>

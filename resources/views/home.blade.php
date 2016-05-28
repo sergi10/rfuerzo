@@ -10,7 +10,7 @@ RFuerzo
 				<h1> 
 					<img src="../assets/img/index.jpeg" class="img-responsive" alt="" width="64" style="display: inline;">
 					<strong class="label label-default">  RFuerzo  </strong>
-					<small>  la plataforma de apoyo al aprendizaje</small>
+					<small style="margin-left: 0.5em">  la plataforma de apoyo al aprendizaje</small>
 				</h1>
 			</div>
 			<div class="panel-body" >					

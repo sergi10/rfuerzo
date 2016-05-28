@@ -1,5 +1,4 @@
 @extends('layout.default')
-@extends('layout.default')
 @section ('title')
 Crear Tema
 @stop
@@ -8,8 +7,9 @@ Crear Tema
 @include('layout.errores') 
 </br>
 <div></div>
-{!! Form::open(array('url' => 'tema', 'method' => 'post', 'files'=> true)) !!}
 <div class="form-horizontal">
+{!! Form::open(array('url' => 'tema', 'method' => 'post', 'files'=> true)) !!}
+
     <div class="form-group">
         {!! Form::label('titulo', 'Titulo', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-9 col-sm-offset-1">
@@ -36,6 +36,7 @@ Crear Tema
         </div>
     </div>
     @include('layout.enviar') 
-</div>
+
 {!!  Form::close()  !!} 
+</div>
 @stop

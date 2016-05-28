@@ -78,8 +78,8 @@ Modo de Uso
 								</tr>
 								<tr class="danger">
 									<td>Administrador</td>
-									<td>adminRefuezo</td>
-									<td>adminRefuezo</td>
+									<td>adminRfuezo</td>
+									<td>adminRfuezo</td>
 								</tr>
 								<tr class="info">
 									<td>Profesor</td>

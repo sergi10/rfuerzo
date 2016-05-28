@@ -21,6 +21,7 @@ class NotasController extends Controller
      */
     public function index()
     {
+    // alumno_id, tarea_id, nota, activa
         $notas = Notas::all();
         return \View::make('notas.index', array('datos'=>$notas));
     }
@@ -35,12 +36,14 @@ class NotasController extends Controller
         if (Auth::level() == 0){
             $alumnos = Alumno::where('id', '=', Auth::get_alumno_id());
         }else {
+            // $alumnos = Alumno::lists('apellidos', 'id');
             $profe_id = Auth::get_owner();
             $alumnos = Alumno::where('profesor_id', '=', $profe_id);
             $temas = Tema::where('profesor_id', '=', $profe_id)->get()->toArray(); 
             $tareas = Tarea::where('tema_id','in', $temas)->get()->all();
         }
-        
+        // dd($profe_id, $temas, $tareas);
+        // $list_tareas = $tareas->lists('nombre', 'id');
         $list_tareas = Tarea::lists('nombre', 'id');
         $list_alumnos = $alumnos->lists('nombre', 'id');
         return \View::make('notas.create', array('tareas'=>$list_tareas, 'alumnos'=>$list_alumnos));
@@ -54,6 +57,7 @@ class NotasController extends Controller
      */
     public function store(Request $request)
     {
+    // alumno_id, tarea_id, nota, activa
         $rules = array(
             'alumno_id'    => 'required',           
             'tarea_id' => 'required',    
@@ -79,7 +83,7 @@ class NotasController extends Controller
                     ->where('alumno_id',\Input::get('alumno_id'))
                     ->where('tarea_id', \Input::get('tarea_id'))
                     ->get();
-            
+            // dd($nota);
             if (count($querynota) > 0){
                 $querynotaUP = \DB::table('resultado_tarea')
                     ->where('alumno_id',\Input::get('alumno_id'))
@@ -88,7 +92,8 @@ class NotasController extends Controller
                     \Session::flash('message', 'La nota ha sido actualizada!');
             } else{
                 // guardar
-                $nota = new Notas;                      
+                $nota = new Notas;      
+                // $notas->id           = $new_id;
                 $nota->alumno_id       = \Input::get('alumno_id');
                 $nota->tarea_id        = \Input::get('tarea_id');
                 $nota->nota            = \Input::get('nota');

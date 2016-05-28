@@ -1,15 +1,19 @@
-
-html {
-    width: 100%;
-    height: 100%;
-    overflow: scroll;
-}
-
 body {
-    width: 100%;
-    height: 100%;
-    overflow: scroll;
+    background-color: #FDFDFD;
 }
+
+#rf-login{
+	right: 0px; position: absolute;	
+}
+.rf-log_label:hover{
+	background-color: #777 !Important;
+	color: #FDFDFD;
+}
+
+.jumbotron{
+	background-color:#B6B6B6;
+}
+
 .jumbotron img{
     margin: 0 auto;    
     padding: 0.15em;
@@ -50,9 +54,6 @@ body {
 .glyphicon-log-out:hover{
     color: #F35A04;
 }
-#adm_label:hover{
-    color: #777;
-}
 
 .perfil_alumno li{
     margin:0.75em;
@@ -81,25 +82,27 @@ body {
 }
 .erroneo{
 	border: 1px solid #9f1d2c;
-
+	box-shadow: inset 0 0 0  2px #cf6767;
  	-webkit-box-shadow: inset 0 0 0  2px #cf6767;
  	-moz-box-shadow: inset 0 0 0  2px #cf6767;
- 	box-shadow: inset 0 0 0  2px #cf6767;
-	/*background-color:  #cf6767;*/
+ 		background-color:  #cf6767;
 }
 
 .caja_errores{
  	border: 1px solid #9f1d2c;
+	box-shadow: inset 0 0 0  2px #cf6767;
  	-webkit-box-shadow: inset 0 0 0  2px #cf6767;
  	-moz-box-shadow: inset 0 0 0  2px #cf6767;
- 	box-shadow: inset 0 0 0  2px #cf6767;
-}
+
+} 	
+
 .fila_error{
 	margin: 1em;
 	padding: 0.5em;
 	border: 0.2em solid gray;
 
 }
+
 .form-horizontal{
 	margin-top: 2em;
 }
@@ -107,7 +110,7 @@ body {
 
 .container {
     padding: 25px;
-    position: fixed;
+   /* position: fixed;*/
 }
 
 .form-login {
@@ -139,43 +142,3 @@ h4 {
 li {
     list-style-type: none;
     }
-/*Seccion para formatear los textos del About*/
-article{
-    font-size: 1.2em;
-    color:  #222 ;
-    text-align: justify;
-    margin-left: 1em;
-    margin-right: 2em;
-}
-article header{
-    font-size: 1.6em;
-    color:  #AAA;
-    margin-top: 2.5em;
-}
-article footer{
-    margin-left: 2em;
-    color: #A1A1A1;
-    font-style: italic;
-}
-
-
-section{
-    margin-left: 1em;
-
-}
-.separador{
-    border: 0;
-    height: 2px;
-    background-image: linear-gradient(to right, rgba(0,0,0,0),rgba(0,0,0,0.75),rgba(0,0,0,0));
-    /*background-image: linear-gradient(left, #75D6D2,#0B635F,#75D6D2);*/
-}
-footer{
-    font-size: 1.5em;
-    color: #666;
-}
-.foot_resp{
-    display: inline;
-}
-.foot_def{
-
-}
