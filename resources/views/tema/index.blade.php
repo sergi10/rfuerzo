@@ -6,27 +6,22 @@
 	<h2>Listado de Temas:</h2> 
     <table id="temas" class="table table-striped table-bordered" cellspacing="10" width="95%">
         <thead>
-            {{-- protected $fillable = array('titulo', 'descripcion', 'enlace','enlace_imagen', 'profesor_id'); --}}
             <tr>
-                {{-- <th>ID</th> --}}
                 <th style="width: 20%">Titulo</th>
                 <th style="width: 30%">Descripcion</th>
                 <th>Tema</th>
-                {{-- <th>audio</th> --}}
                 <th>Profesor</th>
-                <th style="width: 30%"></>
+                <th style="width: 30%"></th>
             </tr>
         </thead> 
         <tbody>
         	@foreach($datos as $key => $value)
             <tr>
-                {{-- <td>{!! $value->id !!}</td> --}}
                 <td>{!! $value->titulo !!}</td>
                 <td>{!! $value->descripcion !!}</td>
                 <td>
-                    <img src="../images/temas/{!! $value->enlace !!}" alt="{!! $value->titulo !!}" class="img-responsive img-rounded"  width="100"></img>
+                    <img src="../images/temas/{!! $value->enlace !!}" alt="{!! $value->titulo !!}" class="img-responsive img-rounded"  width="100">
                 </td>
-                {{-- <td>{!! $value->audio !!}</td> --}}
                 <td>{!! $value->my_profesor() !!}</td>
                 <td>
                     <a class="btn btn-small btn-success" href="{{ URL::to('tema/' . $value->id) }}"> 

@@ -5,7 +5,7 @@
 @section('content')
 	<h2>Crear Centro:</h2>  
     @include('layout.errores')
-    <br></br>
+    <br>
     <div></div>
     {!! Form::open(array('url' => 'centro')) !!}
 

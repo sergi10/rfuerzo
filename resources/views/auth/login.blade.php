@@ -7,7 +7,7 @@
 			<div class"col-md-offset-4"><h2>Error de validación</h2></div>		
 	@endif
     @include('layout.errores') 
-    <br></br>
+    <br>
     
     {!! Form::open(array('url' => 'auth/login', 'method' => 'POST')) !!}
     <div>
@@ -19,13 +19,13 @@
                         <div class="">
                             {!! Form::text('usuario', '',$attributes = $errors->has('usuario') ? array('class' => 'form-control erroneo'):array('class' => 'form-control input-sm chat-input','placeholder'=>'User Name')) !!}
                         </div>
-                    </br>
-                    {!! Form::label('pass', 'Password', ['class' => 'label-control']) !!}
+                        <br>
+                        {!! Form::label('pass', 'Password', ['class' => 'label-control']) !!}
                         <div class="">                    
                             {!! Form::password('pass', '',$attributes = $errors->has('pass') ? array('class' => 'form-control erroneo'):array('class' => 'form-control input-sm chat-input','placeholder'=>'password')) !!}
                         </div>
                 
-                    </br>
+                    <br>
                     <div class="wrapper">
                         <span class="group-btn"> 
                         {!! Form::submit('Acceder', ['class' => 'btn  btn-primary btn-md glyphicon glyphicon-user']) !!} 

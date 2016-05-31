@@ -9,11 +9,9 @@ use App\Tarea;
 use App\Tema;
 class Notas extends Model
 {
-    // alumno_id, tarea_ids, nota, activa
     protected $table = 'resultado_tarea';
 	protected $fillable = array('alumno_id', 'tarea_id', 'nota', 'activa');
 	protected $guarded = array('id');
-	// protected $hidden = array('enlace','enlace_audio');
 	// protected $hidden = array('created_at','updated_at');
 	public $timestamps =  false;
 
@@ -28,7 +26,6 @@ class Notas extends Model
     }
     
     public function my_alumno(){
-        // $alumno = Alumno::where('id', '=',  $this->alumno_id)->get()->first();
         $alumno = Alumno::find($this->alumno_id);
         if ($alumno){
             return $alumno;
@@ -49,8 +46,6 @@ class Notas extends Model
         $tema = \DB::table('tema')
                     ->where('id', '=', $tarea->tema_id)
                     ->get();
-        dd($tarea,  $tema);
-        // return $tarea = Tema::find($this::my_tarea()->tema_id);
         return $tema;
     }
 

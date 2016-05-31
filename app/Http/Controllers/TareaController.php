@@ -48,7 +48,7 @@ class TareaController extends Controller
         $rules = array(
             'nombre'        => 'required|min:6|unique:tarea',          
             'descripcion'   => 'required|min:6', 
-            'file'          => 'required|mime:html', 
+            'file'          => 'required',
             'tema_id'       => 'required'
         );
         $messages = array(
@@ -126,8 +126,7 @@ class TareaController extends Controller
     {
           $rules = array(
             'nombre'        => 'required|min:6',          
-            'descripcion'   => 'required|min:6', 
-            // 'tema_id'       => 'required'
+            'descripcion'   => 'required|min:6'
         );
         $messages = array(
             'required' => 'El campo :attribute es obligatorio.',
@@ -149,6 +148,15 @@ class TareaController extends Controller
             }
             if (\Input::exists('descripcion')){
                 $tarea->descripcion          = \Input::get('descripcion');
+            }
+			if (\Input::exists('enlace')){
+				$archivo = \Input::file('file');				
+				$nombre = $archivo->getClientOriginalName();
+				if (strlen($nombre)> 0){							
+					$destino = '/tareas/';
+					$archivo->move(getcwd().$destino, $nombre);
+					$tema->enlace           = $nombre;
+				} 
             }
             
             $tarea->save();

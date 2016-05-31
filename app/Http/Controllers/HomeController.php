@@ -29,9 +29,7 @@ class HomeController extends Controller
     }
 
     public function login(){
-
-    	// return view('login');
-    	return Redirect::to('login');
+    	return Redirect::to('auth/login');
     }
 
     public function logear(){

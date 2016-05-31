@@ -4,7 +4,6 @@
 @stop
 @section('content')
 	<h2>Crear Nota:</h2>  
-    {{-- // alumno_id, tarea_id, nota, activa --}}
     @include('layout.errores') 
 
    
@@ -26,7 +25,6 @@
         {!! Form::label('nota', 'Nota', ['class' => 'col-sm-2 control-label']) !!}
             <div class="col-sm-9 col-sm-offset-1">
                 {!! Form::number('nota', Input::old('nota'), ['step'=>'0.05', 'minmax' => '0|10','class' => 'form-control']) !!}
-                {{-- Form::number($name, $value = null, $step = null, $options = array()) --}}
             </div>
         </div>
          <div class="form-group">

@@ -7,7 +7,7 @@
 
     @include('layout.errores') 
 
-    {!! Form::model($datos, array('route' => array('tarea.update', $datos->id), 'method' => 'PUT')) !!}
+    {!! Form::model($datos, array('route' => array('tarea.update', $datos->id), 'method' => 'PUT','files'=> true)) !!}
     <div class="form-horizontal">
         <div class="form-group">
             {!! Form::label('nombre', 'Titulo', ['class' => 'col-sm-2 control-label']) !!}
@@ -20,16 +20,14 @@
                 <div class="col-sm-9 col-sm-offset-1">
                     {!! Form::textarea('descripcion', Input::old('descripcion'), $attributes = $errors->has('descripcion') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
-            </div>
-             
-            {{-- <div class="form-group">
-            {!! Form::label('file', 'Archivo', ['class' => 'col-sm-2 control-label']) !!}
+            </div> 
+			<div class="form-group">
+            {!! Form::label('file', 'File', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-9 col-sm-offset-1">
                     {!! Form::file('file', Input::old('file'), $attributes = $errors->has('file') ? array('class' => 'form-control erroneo'):array('class' => 'form-control')) !!}
                 </div>
-            </div> --}}
-            <br>
-            
+            </div>            
+            <br>            
        @include('layout.enviar') 
     </div>
     {!!  Form::close()  !!} 

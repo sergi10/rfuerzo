@@ -56,7 +56,7 @@ return [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
             // DB MIGRACIONES
-            // 'database'  => env('DB_DATABASE', 'lenguas'),
+            // 'database'  => env('DB_DATABASE', 'rfuerzo'),
             
             // DB SQL
             'database'  => env('DB_DATABASE', 'rfuerzo'),

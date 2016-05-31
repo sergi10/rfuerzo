@@ -71,15 +71,7 @@ class TemaController extends Controller
         );
         $validator = \Validator::make(\Input::all(), $rules, $messages);
        
-          // dd($archivo, $nombre, $destino);         
-        // \Storage::put($archivo, \Input::get('imagen'));
-        // file_put_contents(getcwd().$destino.$archivo, \Storage::get($archivo));
-        
-
-        // \Storage::put($nombre, $archivo);
-        // file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
-        // $file->move(getcwd().$destino, $nombre);
-        
+                 
         // proceso de login
         if ($validator->fails()) {
             return \Redirect::to('tema/create')
@@ -87,28 +79,10 @@ class TemaController extends Controller
         } else {
             // obtener imagen
             $archivo = \Input::file('enlace');
-            $nombre = uniqid();
-
-            $nombre_file = $archivo->getClientOriginalName();
-            $nombre_file2 = $nombre .'.'.$archivo->getClientOriginalExtension();
-            // dd($archivo,$nombre_file,$nombre_file2);
-            // $ruta = public_path('/images/temas/'. $nombre_file);
-            $request->file('enlace')->move(
-                base_path().'/public/images/temas/', $nombre_file);
-
-
-
-            // // $nombre = $nombre .'.png';
-            // // $nombre = $nombre .'.png';
-            // $nombre =  \Input::file('enlace')->getClientOriginalName();
-            // $destino = '/images/temas/';
-            // \Storage::put($nombre, $archivo);
-            // file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
-          
-
-
-
-
+            $nombre_file = $archivo->getClientOriginalName();			           
+            $destino = '/images/temas/';
+            $archivo->move(getcwd().$destino, $nombre_file);
+				
 
             // guardar
             $tema = new Tema;            
@@ -188,13 +162,13 @@ class TemaController extends Controller
                 $tema->descripcion          = \Input::get('descripcion');
             }
             if (\Input::exists('enlace')){
-                $archivo = \Input::file('enlace');
-                $nombre = uniqid();
-                $nombre =  \Input::file('enlace')->getClientOriginalName();
-                $destino = '/images/temas/';
-                \Storage::put($nombre, $archivo);
-                file_put_contents(getcwd().$destino.$nombre, \Storage::get($nombre));
-                $tema->enlace = \Input::get('enlace');
+				$archivo = \Input::file('enlace');				
+				$nombre_file = $archivo->getClientOriginalName();
+				if (strlen($nombre_file)> 0){							
+					$destino = '/images/temas/';
+					$archivo->move(getcwd().$destino, $nombre_file);
+					$tema->enlace           = $nombre_file;
+				} 
             }
             $tema->save();
 
